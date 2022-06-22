@@ -1,0 +1,26 @@
+let CONFIG_ACTIVE = null;
+
+
+try {
+    // eslint-disable-next-line no-undef
+    CONFIG_ACTIVE = EnvConfig.ACTIVE;
+} catch (err) {
+    CONFIG_ACTIVE = "prod";
+    console.warn("配置激活失败！");
+}
+
+
+let constants = {
+    ACTIVE: CONFIG_ACTIVE
+};
+switch (CONFIG_ACTIVE) {
+    case "prod":
+        constants.BASE_URL = 'http://192.168.0.66:8899/newerp/api';
+        break
+    case "dev":
+        constants.BASE_URL = 'http://localhost:8899/newErpApi/newerp/api';
+        break;
+}
+
+export default constants;
+

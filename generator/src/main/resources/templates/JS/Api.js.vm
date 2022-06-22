@@ -1,0 +1,22 @@
+import {appHttpClientV2} from '../base/HttpClientV2'
+
+const BASE = "#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end";
+
+export default {
+
+    page(params) {
+        return appHttpClientV2.get(BASE + "/page", params);
+    },
+    list(params) {
+        return appHttpClientV2.get(BASE + "/list", params);
+    },
+    delete(data) {
+        return appHttpClientV2.post(BASE + "/delete", data);
+    },
+    update(data) {
+        return appHttpClientV2.post(BASE + "/update", data);
+    },
+    add(data) {
+        return appHttpClientV2.post(BASE + "/add", data);
+    },
+}

@@ -1,0 +1,194 @@
+import Vue from 'vue';
+import Constants from './HttpConstants.js';
+
+function HttpClient(baseUrl, active) {
+    return {
+        baseURL: baseUrl,
+        active: active,
+        openLog: function () {
+            this.handle.isPrintedLog = true;
+        },
+        closeLog: function () {
+            this.handle.isPrintedLog = false;
+        },
+        getActive: function () {
+            return this.active;
+        },
+        getBaseUrl: function () {
+            return this.baseURL;
+        },
+
+        getForAsync: async function (path, params) {
+            let handle = this.handle;
+            let config = {
+                baseURL: baseUrl,
+                method: 'get',
+                url: path,
+                withCredentials: true,
+                params: params,
+                headers: {'Authorization': handle.getAuthHeader()}
+            }
+
+            try {
+                let response = await Vue.axios(config);
+                response = response.data;
+                return response;
+            } catch (error) {
+                return handle.handleError(error);
+            }
+        }
+        ,
+
+        get: function (path, params) {
+            let handle = this.handle;
+
+            let promise = Vue.axios({
+                baseURL: baseUrl,
+                method: 'get',
+                url: path,
+                withCredentials: true,
+                params: params,
+                headers: {'Authorization': handle.getAuthHeader()}
+            }).then(function (response) {
+                let data = handle.handleResponse(response);
+                return data;
+            }).catch(function (error) {
+                return handle.handleError(error);
+            });
+
+            return promise;
+        },
+
+        postForAsync: async function (path, data) {
+            let handle = this.handle;
+            let config = {
+                baseURL: baseUrl,
+                method: 'post',
+                url: path,
+                withCredentials: true,
+                data: data,
+                headers: {'Authorization': handle.getAuthHeader()}
+            }
+
+            try {
+                let response = await Vue.axios(config);
+                response = response.data;
+                return response;
+            } catch (error) {
+                return handle.handleError(error);
+            }
+        }
+        ,
+
+        post: function (path, data) {
+            let handle = this.handle;
+            let promise = Vue.axios({
+                baseURL: baseUrl,
+                method: 'post',
+                url: path,
+                withCredentials: true,
+                data: data,
+                headers: {'Authorization': handle.getAuthHeader()}
+            }).then(function (response) {
+                return handle.handleResponse(response);
+            }).catch(function (error) {
+                return handle.handleError(error);
+            });
+            return promise;
+        },
+
+        postWithParamsForAsync: async function (path, params) {
+            let handle = this.handle;
+            let config = {
+                baseURL: baseUrl,
+                method: 'post',
+                url: path,
+                withCredentials: true,
+                params: params,
+                headers: {'Authorization': handle.getAuthHeader()}
+            }
+
+            try {
+                let response = await Vue.axios(config);
+                response = response.data;
+                return response;
+            } catch (error) {
+                return handle.handleError(error);
+            }
+        }
+        ,
+
+        postWithParams: function (path, params) {
+            let handle = this.handle;
+            let promise = Vue.axios({
+                baseURL: baseUrl,
+                method: 'post',
+                url: path,
+                withCredentials: true,
+                params: params,
+                headers: {'Authorization': handle.getAuthHeader()}
+            }).then(function (response) {
+                return handle.handleResponse(response);
+            }).catch(function (error) {
+                return handle.handleError(error);
+            });
+            return promise;
+        },
+
+        setAuthorization(token) {
+            let authHeader = "Bearer " + token;
+            this.handle.setAuthHeader(authHeader);
+        },
+
+        removeAuthorization() {
+            this.handle.setAuthHeader(null);
+        },
+
+        handle: {
+
+            isPrintedLog: false,
+
+            setAuthHeader: function (authHeader) {
+                sessionStorage.setItem("authHeader", authHeader);
+            },
+            getAuthHeader: function () {
+                return sessionStorage.getItem("authHeader");
+            },
+            handleResponse: function (response) {
+                if (this.isPrintedLog) {
+                    console.info(response);
+                }
+
+                if (response.status === 200) {
+                    response.isError = false;
+                    return response.data;
+                }
+                else {
+                    return {
+                        isSuccessful: false,
+                        message: response.statusText,
+                        responseBody: response.statusText,
+                        statusCode: response.status,
+                        res: response,
+                        isError: true
+                    }
+                }
+            },
+
+            handleError: function (error) {
+                console.error(error);
+                return ({
+                    isSuccessful: false,
+                    responseBody: error.message,
+                    isError: true,
+                    error: error
+                });
+            }
+        },
+
+    };
+}
+
+const appHttpClientV2 = new HttpClient(Constants.BASE_URL, Constants.ACTIVE);
+
+export {appHttpClientV2};

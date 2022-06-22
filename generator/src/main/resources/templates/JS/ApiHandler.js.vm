@@ -1,0 +1,12 @@
+#foreach($each in ${eachTableNames})
+import ${each.firstLowerEntityName}Api from "@/api/${projectName}/${each.entityName}Api";
+#end
+
+let apiHandler = {
+
+    #foreach($each2 in ${eachTableNames})
+    ${each2.firstLowerEntityName}Api: ${each2.firstLowerEntityName}Api,
+    #end
+};
+
+export default apiHandler;

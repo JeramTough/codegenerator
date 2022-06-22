@@ -1,0 +1,26 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${dtoPackage}.${entity}Dto;
+import ${baseServicePackage}.MyBaseService;
+import ${paramsPackage}.AddOrUpdate${entity}Params;
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends MyBaseService<${entity}, ${entity}Dto> {
+
+    ${entity}Dto addDataByParams(AddOrUpdate${entity}Params params);
+
+    String updateDataByParams(AddOrUpdate${entity}Params params);
+
+}
+#end

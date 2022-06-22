@@ -1,0 +1,21 @@
+package ${package.Controller};
+
+import com.jeramtough.jtweb.action.controller.JtBaseController;
+import io.swagger.annotations.ApiResponses;
+
+
+/**
+ * <p>
+ * 控制器基类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+
+@ApiResponses({
+})
+public abstract class MyBaseController extends JtBaseController {
+
+
+}
