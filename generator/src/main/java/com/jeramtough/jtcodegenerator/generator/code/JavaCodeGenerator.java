@@ -58,12 +58,12 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
         //模板设置
         fastAutoGenerator.templateConfig(builder -> {
             builder
-                    .entity("/templates/JAVA/Entity.java")
-                    .service("/templates/JAVA/Service.java")
-                    .serviceImpl("/templates/JAVA/ServiceImpl.java")
-                    .mapper("/templates/JAVA/Mapper.java")
-                    .mapperXml("/templates/JAVA/mapper.xml")
-                    .controller("/templates/JAVA/Controller.java");
+                    .entity("/templates/JAVA/jt/Entity.java")
+                    .service("/templates/JAVA/jt/Service.java")
+                    .serviceImpl("/templates/JAVA/jt/ServiceImpl.java")
+                    .mapper("/templates/JAVA/jt/Mapper.java")
+                    .mapperXml("/templates/JAVA/jt/mapper.xml")
+                    .controller("/templates/JAVA/jt/Controller.java");
         });
 
         //自定义内容

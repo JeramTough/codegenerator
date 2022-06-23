@@ -13,7 +13,7 @@ public class AddOrUpdateParamsJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JAVA/AuParams.java.vm";
+        return "templates/JAVA/jt/AuParams.java.vm";
     }
 
     @Override

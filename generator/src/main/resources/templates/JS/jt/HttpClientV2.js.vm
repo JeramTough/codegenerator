@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Constants from './HttpConstants.js';
+import Constants from './HttpConstants.js.vm';
 
 function HttpClient(baseUrl, active) {
     return {

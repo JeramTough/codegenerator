@@ -13,7 +13,7 @@ public class JsApiJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JS/Api.js.vm";
+        return "templates/JS/jt/Api.js.vm";
     }
 
     @Override

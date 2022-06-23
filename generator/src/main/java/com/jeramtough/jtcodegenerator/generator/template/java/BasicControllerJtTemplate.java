@@ -13,7 +13,7 @@ public class BasicControllerJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JAVA/MyBaseController.java.vm";
+        return "templates/JAVA/jt/MyBaseController.java.vm";
     }
 
     @Override

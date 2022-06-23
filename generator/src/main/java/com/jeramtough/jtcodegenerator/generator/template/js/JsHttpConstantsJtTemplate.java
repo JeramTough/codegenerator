@@ -13,7 +13,7 @@ public class JsHttpConstantsJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JS/HttpConstants.js.vm";
+        return "templates/JS/jt/HttpConstants.js.vm";
     }
 
     @Override

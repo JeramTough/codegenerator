@@ -13,7 +13,7 @@ public class DtoJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JAVA/Dto.java.vm";
+        return "templates/JAVA/jt/Dto.java.vm";
     }
 
     @Override

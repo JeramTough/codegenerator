@@ -13,7 +13,7 @@ public class JsHttpClientV2JtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JS/HttpClientV2.js.vm";
+        return "templates/JS/jt/HttpClientV2.js.vm";
     }
 
     @Override

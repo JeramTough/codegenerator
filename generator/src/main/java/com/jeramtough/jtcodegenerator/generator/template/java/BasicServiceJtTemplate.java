@@ -13,7 +13,7 @@ public class BasicServiceJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JAVA/MyBaseService.java.vm";
+        return "templates/JAVA/jt/MyBaseService.java.vm";
     }
 
     @Override

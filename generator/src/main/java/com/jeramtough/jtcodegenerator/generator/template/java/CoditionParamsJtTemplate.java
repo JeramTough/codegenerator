@@ -13,7 +13,7 @@ public class CoditionParamsJtTemplate extends BaseJtTemplate {
 
     @Override
     protected String getTemplatePath() {
-        return "templates/JAVA/ConditionParams.java.vm";
+        return "templates/JAVA/jt/ConditionParams.java.vm";
     }
 
     @Override
