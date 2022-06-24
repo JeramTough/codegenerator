@@ -59,7 +59,7 @@ public abstract class BaseJtTemplate implements JtTemplate {
 
         File outputFile = new File(outputFilePath.toString());
 
-        if (outputFile.exists()){
+        if (outputFile.exists()) {
             return;
         }
 
@@ -79,4 +79,8 @@ public abstract class BaseJtTemplate implements JtTemplate {
 
     }
 
+    @Override
+    public void generationBefore(EachTableInfo eachTableInfo) {
+        
+    }
 }

@@ -79,6 +79,7 @@ public class CustomParams {
                         ".base.impl";
         objectMap.put("baseServiceImplPackage", baseServiceImplPackage);
 
+        //只有创展才要这样干
         for (TableField tableField : eachTableInfo.getTableInfo().getFields()) {
             if ("id".equals(tableField.getName())){
                 try {

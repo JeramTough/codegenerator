@@ -66,6 +66,9 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
 
                                 String outputPath = pathHandler.getOutputPath(tag);
 
+                                //调用前置通知
+                                jtTemplate.generationBefore(eachTableInfo);
+
                                 CustomParams.setJtTemplateParams(jtTemplate,eachTableInfo);
 
                                 //得出输出路径

@@ -1,7 +1,10 @@
 package com.jeramtough.jtcodegenerator.generator.template.cz.java;
 
+import com.baomidou.mybatisplus.generator.config.po.TableField;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
+
+import java.util.*;
 
 /**
  * <pre>
@@ -25,5 +28,24 @@ public class CzBoJtTemplate extends BaseJtTemplate {
     public String getFileName(EachTableInfo eachTableInfo) {
         String tableModelName = (String) eachTableInfo.getObjectMap().get("tableModelName");
         return tableModelName + "BO.java";
+    }
+
+    @Override
+    public void generationBefore(EachTableInfo eachTableInfo) {
+        //过滤不需要的字段
+        Set<String> filterFieldSet = new HashSet<>(
+                Arrays.asList(
+                        "id",
+                        "importYear"
+                        , "importMonth"
+                        , "unifiedSocialCreditIdentifier"
+                        , "lotNo"
+                        , "fingerprintKey"
+                        , "activeAt"));
+
+        List<TableField> tableFieldList =
+                eachTableInfo.getTableInfo().getFields();
+
+        tableFieldList.removeIf(tableField -> filterFieldSet.contains(tableField.getName()));
     }
 }

@@ -20,4 +20,5 @@ public interface JtTemplate {
 
     String getFileName(EachTableInfo eachTableInfo);
 
+    void generationBefore(EachTableInfo eachTableInfo);
 }
