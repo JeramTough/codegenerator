@@ -1,11 +1,14 @@
 package com.jeramtough.jtcodegenerator.generator.code;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator;
 import com.jeramtough.jtlog.with.WithLogger;
+import typeconvert.CzPostgreSqlTypeConvert;
 
 /**
  * <pre>
@@ -13,22 +16,29 @@ import com.jeramtough.jtlog.with.WithLogger;
  * by @author WeiBoWen
  * </pre>
  */
-public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerator, WithLogger {
+public class CzJavaCodeGenerator extends BaseCodeGenerator
+        implements CodeGenerator, WithLogger {
 
-    public JavaCodeGenerator(
+    public CzJavaCodeGenerator(
             GeneratorConfigAdapter generatorConfigAdapter) {
         super(generatorConfigAdapter);
     }
 
     @Override
     protected GeneratorTag initTag() {
-        return GeneratorTag.JAVA;
+        return GeneratorTag.CZ_JAVA;
+    }
+
+    @Override
+    protected void initDataSourceConfig(DataSourceConfig.Builder builder) {
+        //类型转换器
+        builder.typeConvert(new CzPostgreSqlTypeConvert());
     }
 
     @Override
     protected CustomCodeGenerator initCustomCodeGenerator(
             GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter) {
-        return new JsCustomCodeGenerator(tag, generatorConfigAdapter);
+        return new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter);
     }
 
     @Override
@@ -47,10 +57,10 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
         //包名设置
         fastAutoGenerator.packageConfig(builder -> {
             builder.parent(generatorConfigAdapter.getBasePackageName())
-                   .entity("model.entity")
-                   .service("service")
-                   .serviceImpl("service.impl")
-                   .mapper("mapper")
+                   .entity("datasource.po.datachip.realestate")
+                   .service("web.service.datachip.realestate")
+                   .serviceImpl("web.service.datachip.realestate.impl")
+                   .mapper("datasource.mapper.datachip.realestate")
                    .controller("action.controller")
                    .other("model.dto");
         });
@@ -58,10 +68,10 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
         //模板设置
         fastAutoGenerator.templateConfig(builder -> {
             builder
-                    .entity("/templates/JAVA/jt/Entity.java")
-                    .service("/templates/JAVA/jt/Service.java")
-                    .serviceImpl("/templates/JAVA/jt/ServiceImpl.java")
-                    .mapper("/templates/JAVA/jt/Mapper.java")
+                    .entity("/templates/JAVA/cz/PO.java")
+                    .service("/templates/JAVA/cz/Service.java")
+                    .serviceImpl("/templates/JAVA/cz/ServiceImpl.java")
+                    .mapper("/templates/JAVA/cz/Mapper.java")
                     .mapperXml("/templates/JAVA/jt/mapper.xml")
                     .controller("/templates/JAVA/jt/Controller.java");
         });
@@ -79,6 +89,22 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
             builder.serviceBuilder()
                    .formatServiceFileName("%sService")
                    .formatServiceImplFileName("%sServiceImpl");
+
+            builder.entityBuilder()
+                   .formatFileName("%sPO")
+                   .addIgnoreColumns("lot_no", "fingerprint_key", "active_at", "import_year"
+                           , "import_month", "created_by", "updated_by", "deleted_by",
+                           "created_at",
+                           "updated_at", "deleted_at");
+
+            //只生成这些表
+            builder.addInclude("real_estate_material_price"
+                    , "real_estate_register_info_2"
+                    , "real_estate_material"
+                    , "real_material_completed"
+                    , "real_estate_material_programme_batch"
+                    , "real_estate_material_programme_batch_file"
+                    , "real_estate_transfer_payment");
 
             if (generatorConfigAdapter.isSkipView()) {
                 builder.enableSkipView();

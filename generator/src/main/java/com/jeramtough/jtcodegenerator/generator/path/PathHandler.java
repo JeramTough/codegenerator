@@ -39,6 +39,8 @@ public class PathHandler {
         return switch (tag) {
             case JAVA -> getJavaOutputPath();
             case JS -> getJsOutputPath();
+            case CZ_JAVA -> getJavaOutputPath();
+            default -> throw new RuntimeException();
         };
     }
 

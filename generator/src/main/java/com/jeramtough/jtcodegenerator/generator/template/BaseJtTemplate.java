@@ -79,9 +79,4 @@ public abstract class BaseJtTemplate implements JtTemplate {
 
     }
 
-    protected abstract String getTemplatePath();
-
-    protected abstract String getPackageName(EachTableInfo eachTableInfo);
-
-    protected abstract String getFileName(EachTableInfo eachTableInfo);
 }

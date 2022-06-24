@@ -14,4 +14,10 @@ public interface JtTemplate {
 
     void generating(EachTableInfo eachTableInfo, File outputDir);
 
+    String getTemplatePath();
+
+    String getPackageName(EachTableInfo eachTableInfo);
+
+    String getFileName(EachTableInfo eachTableInfo);
+
 }

@@ -3,7 +3,8 @@ package com.jeramtough.jtcodegenerator.generator.custom;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.jt.java.*;
+import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzBoJtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzVoJtTemplate;
 
 import java.util.List;
 
@@ -13,10 +14,10 @@ import java.util.List;
  * by @author WeiBoWen
  * </pre>
  */
-public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
+public class CzJavaCustomCodeGenerator extends BaseCustomCodeGenerator {
 
 
-    public JavaCustomCodeGenerator(
+    public CzJavaCustomCodeGenerator(
             GeneratorTag tag,
             GeneratorConfigAdapter generatorConfigAdapter) {
         super(tag, generatorConfigAdapter);
@@ -25,12 +26,8 @@ public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
     @Override
     protected void initTemplates(
             List<JtTemplate> jtTemplateList) {
-        this.jtTemplateList.add(new DtoJtTemplate());
-        this.jtTemplateList.add(new BasicControllerJtTemplate());
-        this.jtTemplateList.add(new AddOrUpdateParamsJtTemplate());
-        this.jtTemplateList.add(new CoditionParamsJtTemplate());
-        this.jtTemplateList.add(new BasicServiceJtTemplate());
-        this.jtTemplateList.add(new BasicServiceImplJtTemplate());
+        this.jtTemplateList.add(new CzBoJtTemplate());
+        this.jtTemplateList.add(new CzVoJtTemplate());
     }
 
 }

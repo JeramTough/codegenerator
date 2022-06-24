@@ -1,0 +1,19 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import synthesistaxgovernance.web.service.base.BaseDataChipService;
+import ${boPackage}.${tableModelName}BO;
+import ${voPackage}.${tableModelName}VO;
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.serviceName}
+    extends BaseDataChipService<${tableModelName}PO, ${tableModelName}VO, ${tableModelName}BO> {
+
+}

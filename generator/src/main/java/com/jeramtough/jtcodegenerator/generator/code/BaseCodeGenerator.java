@@ -5,13 +5,10 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGeneratorFactory;
 import com.jeramtough.jtcodegenerator.generator.datasource.DatabasePool;
 import com.jeramtough.jtcodegenerator.generator.path.PathHandler;
 import com.jeramtough.jtcodegenerator.generator.util.MyIoUtil;
 import com.jeramtough.jtlog.with.WithLogger;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
 
@@ -38,21 +35,37 @@ public abstract class BaseCodeGenerator implements CodeGenerator, WithLogger {
     }
 
     protected void init() {
-        tag = initTag();
+
+        this.tag=initTag();
 
         //设置数据库数据源
         DataSource dataSource = initDataSource();
-        fastAutoGenerator = FastAutoGenerator.create(new DataSourceConfig.Builder(dataSource));
+
+        DataSourceConfig.Builder builder=new DataSourceConfig.Builder(dataSource);
+        //初始数据源配置
+        this.initDataSourceConfig(builder);
+
+        fastAutoGenerator = FastAutoGenerator.create(builder);
 
         //自定义模板生成器
-        customCodeGenerator = CustomCodeGeneratorFactory.getCustomCodeGenerator(tag,
-                generatorConfigAdapter);
+        customCodeGenerator = initCustomCodeGenerator(tag,generatorConfigAdapter);
 
         //初始化mybatisplus的代码生成器
         initFastAutoGenerator(fastAutoGenerator);
     }
 
     protected abstract GeneratorTag initTag();
+
+    protected void initDataSourceConfig(DataSourceConfig.Builder builder){
+
+    }
+
+
+    /**
+     * 决定了使用哪个JtCustomCodeGenerator的生成器
+     */
+    protected abstract CustomCodeGenerator initCustomCodeGenerator(
+            GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter);
 
     protected DataSource initDataSource() {
         return DatabasePool.getDataSource(generatorConfigAdapter.getUrl(),

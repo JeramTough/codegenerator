@@ -27,7 +27,10 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
     protected final PathHandler pathHandler;
     protected final GeneratorTag tag;
 
-
+    /**
+     * @param tag                    决定了哪个输出路径，{@see PathHandler}
+     * @param generatorConfigAdapter 设置
+     */
     protected BaseCustomCodeGenerator(
             GeneratorTag tag,
             GeneratorConfigAdapter generatorConfigAdapter) {
@@ -57,13 +60,13 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
         CustomParams.setAll(eachTableInfoList);
 
         jtTemplateList
-                .parallelStream()
                 .forEach(jtTemplate -> {
                     eachTableInfoList
-                            .parallelStream()
                             .forEach(eachTableInfo -> {
 
                                 String outputPath = pathHandler.getOutputPath(tag);
+
+                                CustomParams.setJtTemplateParams(jtTemplate,eachTableInfo);
 
                                 //得出输出路径
                                 StringBuilder outputDirPath = new StringBuilder(

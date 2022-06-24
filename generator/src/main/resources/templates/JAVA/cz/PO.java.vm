@@ -3,15 +3,11 @@ package ${package.Entity};
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
-#if(${swagger2})
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-#end
-#if(${entityLombokModel})
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-#end
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.IdType;
+import synthesistaxgovernance.api.common.AbstractDataChipModel;
+import synthesistaxgovernance.datasource.generatetable.annotation.ColumnInfo;
+import synthesistaxgovernance.datasource.generatetable.annotation.TableInfo;
 
 /**
  * <p>
@@ -21,28 +17,11 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
-#if(${entityLombokModel})
-@Data
-    #if(${superEntityClass})
-    @EqualsAndHashCode(callSuper = true)
-    #else
-    @EqualsAndHashCode(callSuper = false)
-    #end
-@Accessors(chain = true)
-#end
 #if(${table.convert})
 @TableName("${table.name}")
 #end
-#if(${swagger2})
-@ApiModel(value="${entity}对象", description="$!{table.comment}")
-#end
-#if(${superEntityClass})
-public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
-#elseif(${activeRecord})
-public class ${entity} extends Model<${entity}> {
-#else
-public class ${entity} implements Serializable{
-#end
+@TableInfo(comment = "$!{table.comment}")
+public class ${entity} extends AbstractDataChipModel {
 
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
@@ -90,7 +69,8 @@ public class ${entity} implements Serializable{
     #if(${logicDeleteFieldName}==${field.name})
     @TableLogic
     #end
-private ${field.propertyType} ${field.propertyName};
+    @ColumnInfo(comment = "${field.comment}")
+    private ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
 

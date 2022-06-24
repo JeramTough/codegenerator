@@ -1,17 +1,10 @@
-package ${package.Entity};
+package ${customModulePackageName};
 
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
-#if(${swagger2})
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-#end
-#if(${entityLombokModel})
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-#end
+import java.io.Serializable;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * <p>
@@ -21,28 +14,8 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
-#if(${entityLombokModel})
-@Data
-    #if(${superEntityClass})
-    @EqualsAndHashCode(callSuper = true)
-    #else
-    @EqualsAndHashCode(callSuper = false)
-    #end
-@Accessors(chain = true)
-#end
-#if(${table.convert})
-@TableName("${table.name}")
-#end
-#if(${swagger2})
-@ApiModel(value="${entity}对象", description="$!{table.comment}")
-#end
-#if(${superEntityClass})
-public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
-#elseif(${activeRecord})
-public class ${entity} extends Model<${entity}> {
-#else
-public class ${entity} implements Serializable{
-#end
+@Schema(title = "${table.comment}")
+public class ${tableModelName}VO implements Serializable {
 
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
@@ -90,7 +63,8 @@ public class ${entity} implements Serializable{
     #if(${logicDeleteFieldName}==${field.name})
     @TableLogic
     #end
-private ${field.propertyType} ${field.propertyName};
+    @Schema(title = "${field.comment}")
+    private ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
 

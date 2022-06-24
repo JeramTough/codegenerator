@@ -3,6 +3,8 @@ package com.jeramtough.jtcodegenerator.generator.code;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
+import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
 import com.jeramtough.jtlog.with.WithLogger;
 
 import java.util.function.Consumer;
@@ -25,6 +27,13 @@ public class JsCodeGenerator extends BaseCodeGenerator implements CodeGenerator,
     protected GeneratorTag initTag() {
         return GeneratorTag.JS;
     }
+
+    @Override
+    protected CustomCodeGenerator initCustomCodeGenerator(
+            GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter) {
+        return new JsCustomCodeGenerator(tag, generatorConfigAdapter);
+    }
+
 
     @Override
     protected void initFastAutoGenerator(FastAutoGenerator fastAutoGenerator) {

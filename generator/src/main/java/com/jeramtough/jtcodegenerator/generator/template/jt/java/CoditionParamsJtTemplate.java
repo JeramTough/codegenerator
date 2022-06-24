@@ -1,4 +1,4 @@
-package com.jeramtough.jtcodegenerator.generator.template.java;
+package com.jeramtough.jtcodegenerator.generator.template.jt.java;
 
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
@@ -12,18 +12,18 @@ import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
 public class CoditionParamsJtTemplate extends BaseJtTemplate {
 
     @Override
-    protected String getTemplatePath() {
+    public String getTemplatePath() {
         return "templates/JAVA/jt/ConditionParams.java.vm";
     }
 
     @Override
-    protected String getPackageName(EachTableInfo eachTableInfo) {
+    public String getPackageName(EachTableInfo eachTableInfo) {
         String lowerEntityName= (String) eachTableInfo.getObjectMap().get("lowerEntityName");
         return "model.params."+lowerEntityName;
     }
 
     @Override
-    protected String getFileName(EachTableInfo eachTableInfo) {
+    public String getFileName(EachTableInfo eachTableInfo) {
         return eachTableInfo.getTableInfo().getEntityName() + "ConditionParams.java";
     }
 }

@@ -3,10 +3,10 @@ package com.jeramtough.jtcodegenerator.generator.custom;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
 import com.jeramtough.jtcodegenerator.generator.template.*;
-import com.jeramtough.jtcodegenerator.generator.template.js.JsApiHandlerJtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.js.JsApiJtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.js.JsHttpClientV2JtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.js.JsHttpConstantsJtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.jt.js.JsApiHandlerJtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.jt.js.JsApiJtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.jt.js.JsHttpClientV2JtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.jt.js.JsHttpConstantsJtTemplate;
 
 import java.util.List;
 

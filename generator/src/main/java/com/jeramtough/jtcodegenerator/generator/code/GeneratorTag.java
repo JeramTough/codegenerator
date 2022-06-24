@@ -16,6 +16,11 @@ public enum GeneratorTag {
     /**
      * JS
      */
-    JS
+    JS,
+
+    /**
+     * CZ_JAVA
+     */
+    CZ_JAVA,
 
 }

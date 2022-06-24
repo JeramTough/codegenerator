@@ -2,10 +2,14 @@ package com.jeramtough.jtcodegenerator.generator.custom;
 
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
+import com.baomidou.mybatisplus.generator.config.po.TableField;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
+import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
+import com.jeramtough.jtcomponent.utils.StringUtil;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +34,13 @@ public class CustomParams {
         String projectName = generatorConfigAdapter.getProjectName();
         objectMap.put("projectName", projectName);
 
+        String basePackName = generatorConfigAdapter.getBasePackageName();
+        objectMap.put("basePackName", basePackName);
+
+        String tableModelName = StringUtil.lineToHump(eachTableInfo.getTableInfo().getName(),
+                true);
+        objectMap.put("tableModelName", tableModelName);
+
         String lowerEntityName = tableInfo.getEntityName().toLowerCase();
         objectMap.put("lowerEntityName", lowerEntityName);
 
@@ -39,6 +50,17 @@ public class CustomParams {
         firstLowerEntityName = firstLowerEntityName.substring(1);
         firstLowerEntityName = firstChar + firstLowerEntityName;
         objectMap.put("firstLowerEntityName", firstLowerEntityName);
+
+        //cz的属性
+        String voPackage =
+                generatorConfigAdapter.getBasePackageName() + ".api.model.datachip" +
+                        ".realestate" +
+                        ".vo";
+        objectMap.put("voPackage", voPackage);
+        String boPackage =
+                generatorConfigAdapter.getBasePackageName() + ".api.model.datachip" +
+                        ".realestate.bo";
+        objectMap.put("boPackage", boPackage);
 
         String dtoPackage =
                 generatorConfigAdapter.getBasePackageName() + ".model.dto";
@@ -56,6 +78,19 @@ public class CustomParams {
                 generatorConfigAdapter.getBasePackageName() + "." + packageConfig.getService() +
                         ".base.impl";
         objectMap.put("baseServiceImplPackage", baseServiceImplPackage);
+
+        for (TableField tableField : eachTableInfo.getTableInfo().getFields()) {
+            if ("id".equals(tableField.getName())){
+                try {
+                    Field field=tableField.getClass().getDeclaredField("keyIdentityFlag");
+                    field.setAccessible(true);
+                    field.set(tableField,true);
+                }
+                catch (IllegalAccessException | NoSuchFieldException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 
     public static void setAll(List<EachTableInfo> eachTableInfoList) {
@@ -77,5 +112,16 @@ public class CustomParams {
                         .put("eachTableNames",
                                 eachTableNames));
 
+    }
+
+
+    public static void setJtTemplateParams(JtTemplate jtTemplate,
+                                           EachTableInfo eachTableInfo) {
+
+        String templatePackageName=
+                jtTemplate.getPackageName(eachTableInfo);
+        String basePackName = (String) eachTableInfo.getObjectMap().get("basePackName");
+        String customModulePackageName = basePackName + "." + templatePackageName;
+        eachTableInfo.getObjectMap().put("customModulePackageName", customModulePackageName);
     }
 }
