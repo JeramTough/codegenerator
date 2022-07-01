@@ -1,5 +1,6 @@
 package com.jeramtough.jtcodegenerator.generator.template.jt.java;
 
+import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
 
@@ -10,6 +11,10 @@ import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
  * </pre>
  */
 public class BasicServiceJtTemplate extends BaseJtTemplate {
+
+    public BasicServiceJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+        super(generatorConfigAdapter);
+    }
 
     @Override
     public String getTemplatePath() {

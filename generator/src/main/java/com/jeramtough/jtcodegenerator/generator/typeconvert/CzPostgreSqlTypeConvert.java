@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package typeconvert;
+package com.jeramtough.jtcodegenerator.generator.typeconvert;
 
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.ITypeConvert;
@@ -21,8 +21,6 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 
 import static com.baomidou.mybatisplus.generator.config.rules.DbColumnType.*;
-import static typeconvert.TypeConverts.contains;
-import static typeconvert.TypeConverts.containsAny;
 
 /**
  * PostgreSQL 字段类型转换
@@ -39,16 +37,16 @@ public class CzPostgreSqlTypeConvert implements ITypeConvert {
     @Override
     public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
         return TypeConverts.use(fieldType)
-                           .test(containsAny("char", "text", "json", "enum").then(STRING))
-                           .test(contains("bigint").then(LONG))
-                           .test(contains("int").then(INTEGER))
-                           .test(containsAny("date", "time").then(t -> toDateType(config, t)))
-                           .test(contains("bit").then(BOOLEAN))
-                           .test(containsAny("decimal", "numeric").then(BIG_DECIMAL))
-                           .test(contains("bytea").then(BYTE_ARRAY))
-                           .test(contains("float").then(FLOAT))
-                           .test(contains("double").then(DOUBLE))
-                           .test(contains("boolean").then(BOOLEAN))
+                           .test(TypeConverts.containsAny("char", "text", "json", "enum").then(STRING))
+                           .test(TypeConverts.contains("bigint").then(LONG))
+                           .test(TypeConverts.contains("int").then(INTEGER))
+                           .test(TypeConverts.containsAny("date", "time").then(t -> toDateType(config, t)))
+                           .test(TypeConverts.contains("bit").then(BOOLEAN))
+                           .test(TypeConverts.containsAny("decimal", "numeric").then(BIG_DECIMAL))
+                           .test(TypeConverts.contains("bytea").then(BYTE_ARRAY))
+                           .test(TypeConverts.contains("float").then(FLOAT))
+                           .test(TypeConverts.contains("double").then(DOUBLE))
+                           .test(TypeConverts.contains("boolean").then(BOOLEAN))
                            .or(STRING);
     }
 

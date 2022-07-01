@@ -21,8 +21,13 @@ public class CzZhzsGeneratorMain {
             }
 
             @Override
+            public String getBusinessPrefix() {
+                return "realestate";
+            }
+
+            @Override
             public boolean isSkipView() {
-                return false;
+                return true;
             }
 
             @Override
@@ -38,7 +43,8 @@ public class CzZhzsGeneratorMain {
 
             @Override
             public String getUrl() {
-                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
+//                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
+                return "jdbc:postgresql://192.168.8.212:5432/synthesis-tax-governance?user=postgres&password=postgres!@#123&stringtype=unspecified";
             }
 
             @Override
@@ -48,7 +54,8 @@ public class CzZhzsGeneratorMain {
 
             @Override
             public String[] getUsernameAndPassword() {
-                return new String[]{"postgres", "123456"};
+//                return new String[]{"postgres", "123456"};
+                return new String[]{"postgres", "postgres!@#123"};
             }
 
         };

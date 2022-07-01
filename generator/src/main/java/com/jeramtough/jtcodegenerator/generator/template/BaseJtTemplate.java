@@ -1,10 +1,8 @@
 package com.jeramtough.jtcodegenerator.generator.template;
 
 import cn.hutool.core.io.IoUtil;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
-import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
-import com.jeramtough.jtcomponent.utils.JtFileUtil;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -23,10 +21,12 @@ import java.util.Objects;
  */
 public abstract class BaseJtTemplate implements JtTemplate {
 
+    private final GeneratorConfigAdapter generatorConfigAdapter;
     private VelocityEngine velocityEngine;
     private Template template;
 
-    protected BaseJtTemplate() {
+    protected BaseJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+        this.generatorConfigAdapter = generatorConfigAdapter;
         this.velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(
                 VelocityEngine.RUNTIME_LOG_NAME, this.getClass().getSimpleName());
@@ -82,5 +82,9 @@ public abstract class BaseJtTemplate implements JtTemplate {
     @Override
     public void generationBefore(EachTableInfo eachTableInfo) {
         
+    }
+
+    public GeneratorConfigAdapter getGeneratorConfigAdapter() {
+        return generatorConfigAdapter;
     }
 }

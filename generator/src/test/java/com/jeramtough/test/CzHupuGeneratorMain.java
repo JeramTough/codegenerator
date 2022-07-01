@@ -1,8 +1,7 @@
 package com.jeramtough.test;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.code.JavaCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.JsCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
 
 /**
  * <pre>
@@ -10,18 +9,18 @@ import com.jeramtough.jtcodegenerator.generator.code.JsCodeGenerator;
  * by @author WeiBoWen
  * </pre>
  */
-public class BbeGeneratorMain {
+public class CzHupuGeneratorMain {
 
     public static void main(String[] args) {
         GeneratorConfigAdapter generatorConfigAdapter = new GeneratorConfigAdapter() {
             @Override
             public String getBasePackageName() {
-                return "com.icloudmap.bbe";
+                return "synthesistaxgovernance";
             }
 
             @Override
             public String getBusinessPrefix() {
-                return null;
+                return "hepu";
             }
 
             @Override
@@ -42,24 +41,25 @@ public class BbeGeneratorMain {
 
             @Override
             public String getUrl() {
-                return "jdbc:oracle:thin:@192.168.0.66:1521:ORCL";
+//                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
+                return "jdbc:postgresql://192.168.8.212:5432/synthesis-tax-governance?user=postgres&password=postgres!@#123&stringtype=unspecified";
             }
 
             @Override
             public String getDriverName() {
-                return "oracle.jdbc.OracleDriver";
+                return "org.postgresql.Driver";
             }
 
             @Override
             public String[] getUsernameAndPassword() {
-                return new String[]{"onemap", "salis"};
+//                return new String[]{"postgres", "123456"};
+                return new String[]{"postgres", "postgres!@#123"};
             }
+
         };
 
-        JavaCodeGenerator javaCodeGenerator = new JavaCodeGenerator(generatorConfigAdapter);
-        JsCodeGenerator jsCodeGenerator = new JsCodeGenerator(generatorConfigAdapter);
+        CzJavaCodeGenerator javaCodeGenerator = new CzJavaCodeGenerator(generatorConfigAdapter);
 
         javaCodeGenerator.generating();
-        jsCodeGenerator.generating();
     }
 }

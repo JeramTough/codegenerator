@@ -2,13 +2,13 @@ package com.jeramtough.jtcodegenerator.generator.code;
 
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator;
+import com.jeramtough.jtcomponent.utils.StringUtil;
 import com.jeramtough.jtlog.with.WithLogger;
-import typeconvert.CzPostgreSqlTypeConvert;
+import com.jeramtough.jtcodegenerator.generator.typeconvert.CzPostgreSqlTypeConvert;
 
 /**
  * <pre>
@@ -56,12 +56,17 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
 
         //包名设置
         fastAutoGenerator.packageConfig(builder -> {
+
+            String businessPrefix = (StringUtil.isEmpty(
+                    super.generatorConfigAdapter.getBusinessPrefix()) ? "" :
+                    "." + super.generatorConfigAdapter.getBusinessPrefix());
+
             builder.parent(generatorConfigAdapter.getBasePackageName())
-                   .entity("datasource.po.datachip.realestate")
-                   .service("web.service.datachip.realestate")
-                   .serviceImpl("web.service.datachip.realestate.impl")
-                   .mapper("datasource.mapper.datachip.realestate")
-                   .controller("action.controller")
+                   .entity("datasource.po.datachip" + businessPrefix)
+                   .service("web.service.datachip" + businessPrefix)
+                   .serviceImpl("web.service.datachip" + businessPrefix + ".impl")
+                   .mapper("datasource.mapper.datachip" + businessPrefix)
+                   .controller("action.controller" + businessPrefix)
                    .other("model.dto");
         });
 
@@ -92,10 +97,10 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
 
             builder.entityBuilder()
                    .formatFileName("%sPO")
-                   .addIgnoreColumns("lot_no", "fingerprint_key", "active_at", "import_year"
-                           , "import_month", "created_by", "updated_by", "deleted_by",
-                           "created_at",
-                           "updated_at", "deleted_at");
+                   .addIgnoreColumns("lot_no" , "fingerprint_key" , "active_at" , "import_year"
+                           , "import_month" , "created_by" , "updated_by" , "deleted_by" ,
+                           "created_at" ,
+                           "updated_at" , "deleted_at");
 
             //只生成这些表
             builder.addInclude("real_estate_material_price"

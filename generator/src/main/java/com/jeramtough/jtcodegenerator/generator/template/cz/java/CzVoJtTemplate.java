@@ -1,7 +1,9 @@
 package com.jeramtough.jtcodegenerator.generator.template.cz.java;
 
+import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
+import com.jeramtough.jtcomponent.utils.StringUtil;
 
 /**
  * <pre>
@@ -11,6 +13,10 @@ import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
  */
 public class CzVoJtTemplate extends BaseJtTemplate {
 
+    public CzVoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+        super(generatorConfigAdapter);
+    }
+
     @Override
     public String getTemplatePath() {
         return "templates/JAVA/cz/VO.java.vm";
@@ -18,7 +24,9 @@ public class CzVoJtTemplate extends BaseJtTemplate {
 
     @Override
     public String getPackageName(EachTableInfo eachTableInfo) {
-        return "model.datachip.realestate.vo";
+        return "model.datachip" + (StringUtil.isEmpty(
+                getGeneratorConfigAdapter().getBusinessPrefix()) ? "" :
+                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".vo";
     }
 
     @Override

@@ -27,10 +27,10 @@ public class JsCustomCodeGenerator extends BaseCustomCodeGenerator {
     @Override
     protected void initTemplates(
             List<JtTemplate> jtTemplateList) {
-        jtTemplateList.add(new JsApiJtTemplate());
-        jtTemplateList.add(new JsApiHandlerJtTemplate());
-        jtTemplateList.add(new JsHttpClientV2JtTemplate());
-        jtTemplateList.add(new JsHttpConstantsJtTemplate());
+        jtTemplateList.add(new JsApiJtTemplate(super.generatorConfigAdapter));
+        jtTemplateList.add(new JsApiHandlerJtTemplate(super.generatorConfigAdapter));
+        jtTemplateList.add(new JsHttpClientV2JtTemplate(super.generatorConfigAdapter));
+        jtTemplateList.add(new JsHttpConstantsJtTemplate(super.generatorConfigAdapter));
     }
 
 }

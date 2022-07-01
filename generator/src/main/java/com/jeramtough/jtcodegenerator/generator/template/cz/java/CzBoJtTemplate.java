@@ -1,8 +1,10 @@
 package com.jeramtough.jtcodegenerator.generator.template.cz.java;
 
 import com.baomidou.mybatisplus.generator.config.po.TableField;
+import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
+import com.jeramtough.jtcomponent.utils.StringUtil;
 
 import java.util.*;
 
@@ -14,6 +16,10 @@ import java.util.*;
  */
 public class CzBoJtTemplate extends BaseJtTemplate {
 
+    public CzBoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+        super(generatorConfigAdapter);
+    }
+
     @Override
     public String getTemplatePath() {
         return "templates/JAVA/cz/BO.java.vm";
@@ -21,7 +27,9 @@ public class CzBoJtTemplate extends BaseJtTemplate {
 
     @Override
     public String getPackageName(EachTableInfo eachTableInfo) {
-        return "model.datachip.realestate.bo";
+        return "model.datachip" + (StringUtil.isEmpty(
+                getGeneratorConfigAdapter().getBusinessPrefix()) ? "" :
+                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".bo";
     }
 
     @Override
@@ -35,7 +43,7 @@ public class CzBoJtTemplate extends BaseJtTemplate {
         //过滤不需要的字段
         Set<String> filterFieldSet = new HashSet<>(
                 Arrays.asList(
-                        "id",
+                        "id" ,
                         "importYear"
                         , "importMonth"
                         , "unifiedSocialCreditIdentifier"

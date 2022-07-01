@@ -26,8 +26,8 @@ public class CzJavaCustomCodeGenerator extends BaseCustomCodeGenerator {
     @Override
     protected void initTemplates(
             List<JtTemplate> jtTemplateList) {
-        this.jtTemplateList.add(new CzBoJtTemplate());
-        this.jtTemplateList.add(new CzVoJtTemplate());
+        this.jtTemplateList.add(new CzBoJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzVoJtTemplate(super.generatorConfigAdapter));
     }
 
 }

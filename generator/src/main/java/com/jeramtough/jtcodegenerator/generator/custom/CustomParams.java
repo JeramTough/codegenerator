@@ -40,6 +40,10 @@ public class CustomParams {
         String tableModelName = StringUtil.lineToHump(eachTableInfo.getTableInfo().getName(),
                 true);
         objectMap.put("tableModelName", tableModelName);
+        String firstLowerTableModelName =
+                StringUtil.lineToHump(eachTableInfo.getTableInfo().getName(),
+                false);
+        objectMap.put("firstLowerTableModelName", firstLowerTableModelName);
 
         String lowerEntityName = tableInfo.getEntityName().toLowerCase();
         objectMap.put("lowerEntityName", lowerEntityName);

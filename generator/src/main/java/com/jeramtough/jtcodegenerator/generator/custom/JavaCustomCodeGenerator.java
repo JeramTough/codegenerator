@@ -16,21 +16,19 @@ import java.util.List;
 public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
 
 
-    public JavaCustomCodeGenerator(
-            GeneratorTag tag,
-            GeneratorConfigAdapter generatorConfigAdapter) {
+    public JavaCustomCodeGenerator(GeneratorTag tag,
+                                   GeneratorConfigAdapter generatorConfigAdapter) {
         super(tag, generatorConfigAdapter);
     }
 
     @Override
-    protected void initTemplates(
-            List<JtTemplate> jtTemplateList) {
-        this.jtTemplateList.add(new DtoJtTemplate());
-        this.jtTemplateList.add(new BasicControllerJtTemplate());
-        this.jtTemplateList.add(new AddOrUpdateParamsJtTemplate());
-        this.jtTemplateList.add(new CoditionParamsJtTemplate());
-        this.jtTemplateList.add(new BasicServiceJtTemplate());
-        this.jtTemplateList.add(new BasicServiceImplJtTemplate());
+    protected void initTemplates(List<JtTemplate> jtTemplateList) {
+        this.jtTemplateList.add(new DtoJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new BasicControllerJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new AddOrUpdateParamsJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CoditionParamsJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new BasicServiceJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new BasicServiceImplJtTemplate(super.generatorConfigAdapter));
     }
 
 }

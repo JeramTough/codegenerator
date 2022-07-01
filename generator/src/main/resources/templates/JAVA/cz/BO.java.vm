@@ -16,7 +16,7 @@ import synthesistaxgovernance.api.common.AbstractDataChipBoModel;
  * @since ${date}
  */
 @TemplateTable(
-        templateCode = ContractBO.DATA_FRAGMENTS_CODE,
+        templateCode = ${tableModelName}BO.DATA_FRAGMENTS_CODE,
         templateName = "$!{table.comment}",
         groupCodes = {"1", "2"}
 )
@@ -25,6 +25,8 @@ public class ${tableModelName}BO extends AbstractDataChipBoModel {
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
 #end
+    public static final String DATA_FRAGMENTS_CODE = "${firstLowerTableModelName}";
+
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
