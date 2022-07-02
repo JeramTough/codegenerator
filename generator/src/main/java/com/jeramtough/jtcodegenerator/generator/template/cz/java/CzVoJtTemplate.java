@@ -1,9 +1,15 @@
 package com.jeramtough.jtcodegenerator.generator.template.cz.java;
 
+import com.baomidou.mybatisplus.generator.config.po.TableField;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
 import com.jeramtough.jtcomponent.utils.StringUtil;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <pre>
@@ -33,5 +39,36 @@ public class CzVoJtTemplate extends BaseJtTemplate {
     public String getFileName(EachTableInfo eachTableInfo) {
         String tableModelName = (String) eachTableInfo.getObjectMap().get("tableModelName");
         return tableModelName + "VO.java";
+    }
+
+    @Override
+    public void generationBefore(EachTableInfo eachTableInfo) {
+        Set<String> filterImportPackagesSet = new HashSet<>(
+                Arrays.asList(
+                        "com.baomidou.mybatisplus.annotation.TableName" ,
+                        "java.io.Serializable",
+                        "com.baomidou.mybatisplus.annotation.IdType",
+                        "com.baomidou.mybatisplus.annotation.TableId"
+                ));
+
+
+        Set<String>importPackagesSet= eachTableInfo.getTableInfo().getImportPackages();
+        importPackagesSet.removeIf(filterImportPackagesSet::contains);
+
+        //过滤不需要的字段
+        Set<String> filterFieldSet = new HashSet<>(
+                Arrays.asList(
+                        "id" ,
+                        "importYear"
+                        , "importMonth"
+                        , "unifiedSocialCreditIdentifier"
+                        , "lotNo"
+                        , "fingerprintKey"
+                        , "activeAt"));
+
+        List<TableField> tableFieldList =
+                eachTableInfo.getTableInfo().getFields();
+
+        tableFieldList.removeIf(tableField -> filterFieldSet.contains(tableField.getName()));
     }
 }

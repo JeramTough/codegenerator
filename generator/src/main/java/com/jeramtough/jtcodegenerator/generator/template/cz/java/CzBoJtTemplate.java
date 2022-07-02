@@ -40,6 +40,18 @@ public class CzBoJtTemplate extends BaseJtTemplate {
 
     @Override
     public void generationBefore(EachTableInfo eachTableInfo) {
+        Set<String> filterImportPackagesSet = new HashSet<>(
+                Arrays.asList(
+                        "com.baomidou.mybatisplus.annotation.TableName" ,
+                        "java.io.Serializable",
+                        "com.baomidou.mybatisplus.annotation.IdType",
+                        "com.baomidou.mybatisplus.annotation.TableId"
+                ));
+
+
+        Set<String>importPackagesSet= eachTableInfo.getTableInfo().getImportPackages();
+        importPackagesSet.removeIf(filterImportPackagesSet::contains);
+
         //过滤不需要的字段
         Set<String> filterFieldSet = new HashSet<>(
                 Arrays.asList(

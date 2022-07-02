@@ -18,7 +18,7 @@ import synthesistaxgovernance.datasource.generatetable.annotation.TableInfo;
  * @since ${date}
  */
 #if(${table.convert})
-@TableName("${table.name}")
+@TableName("hepu_${table.name}")
 #end
 @TableInfo(comment = "$!{table.comment}")
 public class ${entity} extends AbstractDataChipModel {
@@ -26,6 +26,13 @@ public class ${entity} extends AbstractDataChipModel {
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
 #end
+
+    @TableId(value = "id", type = IdType.AUTO)
+    @ColumnInfo(comment = "主键id")
+    private Long id;
+
+
+
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
@@ -44,11 +51,11 @@ public class ${entity} extends AbstractDataChipModel {
     #if(${field.keyFlag})
         ## 主键
         #if(${field.keyIdentityFlag})
-        @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
+        ##@TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
         #elseif(!$null.isNull(${idType}) && "$!idType" != "")
-        @TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
+        ##@TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
         #elseif(${field.convert})
-        @TableId("${field.annotationColumnName}")
+        ##@TableId("${field.annotationColumnName}")
         #end
         ## 普通字段
     #elseif(${field.fill})
@@ -73,6 +80,16 @@ public class ${entity} extends AbstractDataChipModel {
     private ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 #if(!${entityLombokModel})
     #foreach($field in ${table.fields})

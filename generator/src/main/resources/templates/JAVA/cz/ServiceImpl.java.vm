@@ -21,8 +21,8 @@ import synthesistaxgovernance.web.service.base.impl.BaseDataChipServiceImpl;
 @Service
 public class ${table.serviceImplName}
         extends BaseDataChipServiceImpl
-        <${tableModelName}Mapper,
-                ${tableModelName}PO,
+        <${table.mapperName},
+                ${entity},
                 ${tableModelName}VO,
                 ${tableModelName}BO>
     implements ${table.serviceName}{

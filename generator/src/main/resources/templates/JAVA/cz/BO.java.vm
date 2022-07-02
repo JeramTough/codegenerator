@@ -27,6 +27,9 @@ public class ${tableModelName}BO extends AbstractDataChipBoModel {
 #end
     public static final String DATA_FRAGMENTS_CODE = "${firstLowerTableModelName}";
 
+
+
+
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
@@ -45,11 +48,11 @@ public class ${tableModelName}BO extends AbstractDataChipBoModel {
     #if(${field.keyFlag})
         ## 主键
         #if(${field.keyIdentityFlag})
-        @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
+        ##@TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
         #elseif(!$null.isNull(${idType}) && "$!idType" != "")
-        @TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
+        ##@TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
         #elseif(${field.convert})
-        @TableId("${field.annotationColumnName}")
+        ##@TableId("${field.annotationColumnName}")
         #end
         ## 普通字段
     #elseif(${field.fill})

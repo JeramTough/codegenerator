@@ -20,6 +20,9 @@ public class ${tableModelName}VO implements Serializable {
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
 #end
+    @Schema(title = "id主键")
+    private Long id;
+
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
@@ -38,11 +41,11 @@ public class ${tableModelName}VO implements Serializable {
     #if(${field.keyFlag})
         ## 主键
         #if(${field.keyIdentityFlag})
-        @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
+        ##@TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
         #elseif(!$null.isNull(${idType}) && "$!idType" != "")
-        @TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
+        ##@TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
         #elseif(${field.convert})
-        @TableId("${field.annotationColumnName}")
+        ##@TableId("${field.annotationColumnName}")
         #end
         ## 普通字段
     #elseif(${field.fill})
@@ -67,6 +70,14 @@ public class ${tableModelName}VO implements Serializable {
     private ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 #if(!${entityLombokModel})
     #foreach($field in ${table.fields})
