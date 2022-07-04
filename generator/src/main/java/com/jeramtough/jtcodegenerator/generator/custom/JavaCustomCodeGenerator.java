@@ -2,6 +2,8 @@ package com.jeramtough.jtcodegenerator.generator.custom;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
 import com.jeramtough.jtcodegenerator.generator.template.jt.java.*;
 
@@ -19,6 +21,11 @@ public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
     public JavaCustomCodeGenerator(GeneratorTag tag,
                                    GeneratorConfigAdapter generatorConfigAdapter) {
         super(tag, generatorConfigAdapter);
+    }
+
+    @Override
+    protected TemplateParamsInitializer initTemplateParamsInitializer() {
+        return new JtTemplateParamsInitializer();
     }
 
     @Override

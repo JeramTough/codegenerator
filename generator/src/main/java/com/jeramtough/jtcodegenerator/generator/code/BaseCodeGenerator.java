@@ -74,6 +74,10 @@ public abstract class BaseCodeGenerator implements CodeGenerator, WithLogger {
                 generatorConfigAdapter.getDriverName());
     }
 
+    /**
+     * 配置Entity，Controller，Service这些生成策略之类的，具体看
+     * <a href="https://baomidou.com/pages/981406/">https://baomidou.com/pages/981406/</a>
+     */
     protected abstract void initFastAutoGenerator(FastAutoGenerator fastAutoGenerator);
 
     @Override

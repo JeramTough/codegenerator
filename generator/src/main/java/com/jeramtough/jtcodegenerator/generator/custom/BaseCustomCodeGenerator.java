@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.path.PathHandler;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
 import com.jeramtough.jtcomponent.utils.StringUtil;
@@ -27,6 +28,8 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
     protected final PathHandler pathHandler;
     protected final GeneratorTag tag;
 
+    protected TemplateParamsInitializer templateParamsInitializer;
+
     /**
      * @param tag                    决定了哪个输出路径，{@see PathHandler}
      * @param generatorConfigAdapter 设置
@@ -38,8 +41,11 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
         this.generatorConfigAdapter = generatorConfigAdapter;
         pathHandler = new PathHandler(generatorConfigAdapter.getOutputDir());
 
+        this.templateParamsInitializer = initTemplateParamsInitializer();
         initTemplates(jtTemplateList);
     }
+
+    protected abstract TemplateParamsInitializer initTemplateParamsInitializer();
 
     protected abstract void initTemplates(List<JtTemplate> jtTemplateList);
 
@@ -49,7 +55,6 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
 
         //config.packageConfig.parent
         EachTableInfo eachTableInfo = new EachTableInfo(tableInfo, objectMap);
-        CustomParams.set(generatorConfigAdapter, eachTableInfo);
         eachTableInfoList.add(eachTableInfo);
     }
 
@@ -57,8 +62,22 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
     @Override
     public void execute() {
 
-        CustomParams.setAll(eachTableInfoList);
+        //设置每个模板的自定义属性
+        jtTemplateList
+                .forEach(jtTemplate -> {
+                    eachTableInfoList
+                            .forEach(eachTableInfo -> {
+                                //设置每个表的属性
+                                templateParamsInitializer.setParamsForEachTable(
+                                        jtTemplate,
+                                        generatorConfigAdapter, eachTableInfo);
+                            });
+                });
 
+        //设置全部属性
+        templateParamsInitializer.setParamsForAllTable(eachTableInfoList);
+
+        //真正开始生成
         jtTemplateList
                 .forEach(jtTemplate -> {
                     eachTableInfoList
@@ -69,7 +88,6 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
                                 //调用前置通知
                                 jtTemplate.generationBefore(eachTableInfo);
 
-                                CustomParams.setJtTemplateParams(jtTemplate,eachTableInfo);
 
                                 //得出输出路径
                                 StringBuilder outputDirPath = new StringBuilder(
