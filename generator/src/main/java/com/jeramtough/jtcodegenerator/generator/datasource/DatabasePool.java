@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class DatabasePool {
 
-    private static final Map<String, DataSource> dataSourceMap = new HashMap<>(3);
+    private static final Map<String, DataSource> DATA_SOURCE_MAP = new HashMap<>(3);
 
     public static DataSource getDataSource(String url, String username, String password,
                                            String driverName) {
@@ -23,16 +23,16 @@ public class DatabasePool {
         String key = url + username + password + driverName;
         DataSource dataSource;
         synchronized (DatabasePool.class) {
-            if (!dataSourceMap.containsKey(key)) {
+            if (!DATA_SOURCE_MAP.containsKey(key)) {
                 HikariConfig config = new HikariConfig();
                 config.setJdbcUrl(url);
                 config.setUsername(username);
                 config.setPassword(password);
                 config.setDriverClassName(driverName);
                 dataSource = new HikariDataSource(config);
-                dataSourceMap.put(key, dataSource);
+                DATA_SOURCE_MAP.put(key, dataSource);
             }
-            dataSource = dataSourceMap.get(key);
+            dataSource = DATA_SOURCE_MAP.get(key);
         }
 
         return dataSource;
