@@ -16,4 +16,6 @@ import ${voPackage}.${tableModelName}VO;
 public interface ${table.serviceName}
     extends BaseDataChipService<${entity}, ${tableModelName}VO, ${tableModelName}BO> {
 
+        String REQUEST_MAPPING = "${firstLowerTableModelName}";
+
 }

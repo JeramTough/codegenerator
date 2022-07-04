@@ -3,6 +3,7 @@ package com.jeramtough.jtcodegenerator.generator.custom;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzAddOrUpFormJtTemplate;
 import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzBoJtTemplate;
 import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzVoJtTemplate;
 
@@ -28,6 +29,7 @@ public class CzJavaCustomCodeGenerator extends BaseCustomCodeGenerator {
             List<JtTemplate> jtTemplateList) {
         this.jtTemplateList.add(new CzBoJtTemplate(super.generatorConfigAdapter));
         this.jtTemplateList.add(new CzVoJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzAddOrUpFormJtTemplate(super.generatorConfigAdapter));
     }
 
 }

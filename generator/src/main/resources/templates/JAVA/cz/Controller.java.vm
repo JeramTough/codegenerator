@@ -1,0 +1,102 @@
+package ${package.Controller};
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import synthesistaxgovernance.web.controller.hepu.base.BaseHepuController;
+import ${package.Service}.${table.serviceName};
+import ${boPackage}.${tableModelName}BO;
+import ${voPackage}.${tableModelName}VO;
+import ${requestPackage}.${tableModelName}AddOrUpForm;
+import synthesistaxgovernance.api.common.PaginationRequest;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import synthesistaxgovernance.utils.ModelCopy;
+import javax.validation.constraints.NotNull;
+import synthesistaxgovernance.api.common.Paging;
+
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment}-控制层
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Tag(name = "$!{table.comment}-控制层")
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping(${table.serviceName}.REQUEST_MAPPING)
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} extends BaseHepuController{
+#end
+    private final ${table.serviceName}  ${firstLowerTableModelName}Service;
+
+    @Autowired
+    public ${table.controllerName}(${table.serviceName} ${firstLowerTableModelName}Service) {
+        this.${firstLowerTableModelName}Service = ${firstLowerTableModelName}Service;
+    }
+
+    @PostMapping("add")
+    @Operation(summary = "新增")
+    public ${tableModelName}VO save(@Validated @RequestBody ${tableModelName}AddOrUpForm addOrUpForm) {
+        ${tableModelName}BO bo = ModelCopy.copy(addOrUpForm, ${tableModelName}BO.class);
+        return ${firstLowerTableModelName}Service.insertDataChip(bo);
+    }
+
+    @PostMapping("update")
+    @Operation(summary = "修改")
+    public ${tableModelName}VO update(@Validated @RequestBody ${tableModelName}AddOrUpForm addOrUpForm) {
+        ${tableModelName}BO bo = ModelCopy.copy(addOrUpForm, ${tableModelName}BO.class);
+        return ${firstLowerTableModelName}Service.updateByBO(bo);
+    }
+
+    @PostMapping("deleteByIds")
+    @Operation(summary = "删除")
+    public void deleteByIds(@RequestBody @NotNull(message = "id不能为空") List<Long> ids) {
+        ${firstLowerTableModelName}Service.deleteByIds(ids);
+    }
+
+    @GetMapping("detail/{id}")
+    @Operation(summary = "根据ID查询")
+    public ${tableModelName}VO queryById(@PathVariable @NotNull(message = "id不能为空") Long id) {
+        return ${firstLowerTableModelName}Service.poToVo(${firstLowerTableModelName}Service.getById(id));
+    }
+
+    @GetMapping("page")
+    @Operation(summary = "分页查询")
+    public Paging<${tableModelName}VO> page(PaginationRequest paginationRequest) {
+        return this.${firstLowerTableModelName}Service.pageVO(paginationRequest);
+    }
+
+    @GetMapping("list")
+    @Operation(summary = "列表查询")
+    public List<${tableModelName}VO> list() {
+        return this.${firstLowerTableModelName}Service.listVO();
+    }
+
+
+}
+
+#end

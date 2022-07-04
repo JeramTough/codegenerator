@@ -17,48 +17,48 @@ import java.util.Set;
  * by @author WeiBoWen
  * </pre>
  */
-public class CzVoJtTemplate extends BaseJtTemplate {
+public class CzAddOrUpFormJtTemplate extends BaseJtTemplate {
 
-    public CzVoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+    public CzAddOrUpFormJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
         super(generatorConfigAdapter);
     }
 
     @Override
     public String getTemplatePath() {
-        return "templates/JAVA/cz/VO.java.vm";
+        return "templates/JAVA/cz/AddOrUpForm.java.vm";
     }
 
     @Override
     public String getPackageName(EachTableInfo eachTableInfo) {
         return "model.datachip" + (StringUtil.isEmpty(
                 getGeneratorConfigAdapter().getBusinessPrefix()) ? "" :
-                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".vo";
+                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".request";
     }
 
     @Override
     public String getFileName(EachTableInfo eachTableInfo) {
         String tableModelName = (String) eachTableInfo.getObjectMap().get("tableModelName");
-        return tableModelName + "VO.java";
+        return tableModelName + "AddOrUpForm.java";
     }
 
     @Override
     public void generationBefore(EachTableInfo eachTableInfo) {
         Set<String> filterImportPackagesSet = new HashSet<>(
                 Arrays.asList(
-                        "com.baomidou.mybatisplus.annotation.TableName",
+                        "com.baomidou.mybatisplus.annotation.TableName" ,
                         "java.io.Serializable",
                         "com.baomidou.mybatisplus.annotation.IdType",
                         "com.baomidou.mybatisplus.annotation.TableId"
                 ));
 
 
-        Set<String> importPackagesSet = eachTableInfo.getTableInfo().getImportPackages();
+        Set<String>importPackagesSet= eachTableInfo.getTableInfo().getImportPackages();
         importPackagesSet.removeIf(filterImportPackagesSet::contains);
 
         //过滤不需要的字段
         Set<String> filterFieldSet = new HashSet<>(
                 Arrays.asList(
-                        "id",
+                        "id" ,
                         "importYear"
                         , "importMonth"
                         , "unifiedSocialCreditIdentifier"
@@ -69,6 +69,8 @@ public class CzVoJtTemplate extends BaseJtTemplate {
                         , "createTime"
                         , "updateTime"
                         , "activeAt"));
+
+
 
         List<TableField> tableFieldList =
                 eachTableInfo.getTableInfo().getFields();

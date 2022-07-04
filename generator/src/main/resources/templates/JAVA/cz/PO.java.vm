@@ -5,7 +5,7 @@ import ${pkg};
 #end
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.IdType;
-import synthesistaxgovernance.api.common.AbstractDataChipModel;
+import synthesistaxgovernance.datasource.AbstractDataChipPersistenceModel;
 import synthesistaxgovernance.datasource.generatetable.annotation.ColumnInfo;
 import synthesistaxgovernance.datasource.generatetable.annotation.TableInfo;
 
@@ -21,16 +21,11 @@ import synthesistaxgovernance.datasource.generatetable.annotation.TableInfo;
 @TableName("hepu_${table.name}")
 #end
 @TableInfo(comment = "$!{table.comment}")
-public class ${entity} extends AbstractDataChipModel {
+public class ${entity} extends AbstractDataChipPersistenceModel {
 
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;
 #end
-
-    @TableId(value = "id", type = IdType.AUTO)
-    @ColumnInfo(comment = "主键id")
-    private Long id;
-
 
 
 ## ----------  BEGIN 字段循环遍历  ----------

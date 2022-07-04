@@ -93,6 +93,11 @@ public class CustomParams {
                         businessPrefixPackageName +
                         ".bo";
         objectMap.put("boPackage" , boPackage);
+        String requestPackage =
+                generatorConfigAdapter.getBasePackageName() + ".api.model.datachip" +
+                        businessPrefixPackageName +
+                        ".request";
+        objectMap.put("requestPackage" , requestPackage);
 
 
         String dtoPackage =

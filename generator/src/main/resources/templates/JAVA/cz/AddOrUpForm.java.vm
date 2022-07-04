@@ -13,13 +13,14 @@ import synthesistaxgovernance.api.json.time.InstantAsDateString;
 /**
  * <p>
  * $!{table.comment}
+ * 新增或更新 表单
  * </p>
  *
  * @author ${author}
  * @since ${date}
  */
 @Schema(title = "${table.comment}")
-public class ${tableModelName}VO implements Serializable {
+public class ${tableModelName}AddOrUpForm implements Serializable {
 
 #if(${entitySerialVersionUID})
     private static final long serialVersionUID=1L;

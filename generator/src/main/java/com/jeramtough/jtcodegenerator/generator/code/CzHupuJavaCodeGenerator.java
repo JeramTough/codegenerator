@@ -60,13 +60,12 @@ public class CzHupuJavaCodeGenerator extends BaseCodeGenerator
             String businessPrefix = (StringUtil.isEmpty(
                     super.generatorConfigAdapter.getBusinessPrefix()) ? "" :
                     "." + super.generatorConfigAdapter.getBusinessPrefix());
-
             builder.parent(generatorConfigAdapter.getBasePackageName())
                    .entity("datasource.po.datachip" + businessPrefix)
                    .service("web.service.datachip" + businessPrefix)
                    .serviceImpl("web.service.datachip" + businessPrefix + ".impl")
                    .mapper("datasource.mapper.datachip" + businessPrefix)
-                   .controller("action.controller" + businessPrefix)
+                   .controller("web.controller" + businessPrefix)
                    .other("model.dto");
         });
 
@@ -78,7 +77,7 @@ public class CzHupuJavaCodeGenerator extends BaseCodeGenerator
                     .serviceImpl("/templates/JAVA/cz/ServiceImpl.java")
                     .mapper("/templates/JAVA/cz/Mapper.java")
                     .mapperXml("/templates/JAVA/jt/mapper.xml")
-                    .controller("/templates/JAVA/jt/Controller.java");
+                    .controller("/templates/JAVA/cz/Controller.java");
         });
 
         //自定义内容
@@ -91,6 +90,9 @@ public class CzHupuJavaCodeGenerator extends BaseCodeGenerator
 
         //设置策略
         fastAutoGenerator.strategyConfig(builder -> {
+            builder.controllerBuilder()
+                           .formatFileName("Hepu%sController");
+
             builder.serviceBuilder()
                    .formatServiceFileName("Hepu%sService")
                    .formatServiceImplFileName("Hepu%sServiceImpl");

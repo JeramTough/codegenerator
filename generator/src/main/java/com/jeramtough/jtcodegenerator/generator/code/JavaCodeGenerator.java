@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.custom.JavaCustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
 import com.jeramtough.jtlog.with.WithLogger;
 
@@ -28,7 +29,7 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
     @Override
     protected CustomCodeGenerator initCustomCodeGenerator(
             GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter) {
-        return new JsCustomCodeGenerator(tag, generatorConfigAdapter);
+        return new JavaCustomCodeGenerator(tag, generatorConfigAdapter);
     }
 
     @Override
