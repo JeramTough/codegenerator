@@ -4,14 +4,9 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
-import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitializer;
-import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.typeconvert.CzPostgreSqlTypeConvert;
 import com.jeramtough.jtcomponent.utils.StringUtil;
 import com.jeramtough.jtlog.with.WithLogger;
-import com.jeramtough.jtcodegenerator.generator.typeconvert.CzPostgreSqlTypeConvert;
 
 /**
  * <pre>
@@ -58,13 +53,12 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
             String businessPrefix = (StringUtil.isEmpty(
                     super.generatorConfigAdapter.getBusinessPrefix()) ? "" :
                     "." + super.generatorConfigAdapter.getBusinessPrefix());
-
             builder.parent(generatorConfigAdapter.getBasePackageName())
                    .entity("datasource.po.datachip" + businessPrefix)
                    .service("web.service.datachip" + businessPrefix)
                    .serviceImpl("web.service.datachip" + businessPrefix + ".impl")
                    .mapper("datasource.mapper.datachip" + businessPrefix)
-                   .controller("action.controller" + businessPrefix)
+                   .controller("web.controller" + businessPrefix)
                    .other("model.dto");
         });
 
@@ -76,31 +70,37 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
                     .serviceImpl("/templates/JAVA/cz/ServiceImpl.java")
                     .mapper("/templates/JAVA/cz/Mapper.java")
                     .mapperXml("/templates/JAVA/jt/mapper.xml")
-                    .controller("/templates/JAVA/jt/Controller.java");
+                    .controller("/templates/JAVA/cz/Controller.java");
         });
 
 
         //设置策略
         fastAutoGenerator.strategyConfig(builder -> {
+            builder.controllerBuilder()
+                           .formatFileName("%sController");
+
             builder.serviceBuilder()
                    .formatServiceFileName("%sService")
                    .formatServiceImplFileName("%sServiceImpl");
+            builder.mapperBuilder()
+                           .formatMapperFileName("%sMapper");
 
             builder.entityBuilder()
                    .formatFileName("%sPO")
-                   .addIgnoreColumns("lot_no", "fingerprint_key", "active_at", "import_year"
-                           , "import_month", "created_by", "updated_by", "deleted_by",
-                           "created_at",
-                           "updated_at", "deleted_at");
+                   .addIgnoreColumns("id","lot_no" , "fingerprint_key" , "active_at" ,
+                           "import_year"
+                           , "import_month" , "created_by" , "updated_by" , "deleted_by" ,
+                           "created_at" ,
+                           "updated_at" , "deleted_at");
 
             //只生成这些表
-            builder.addInclude("real_estate_material_price"
+          /*  builder.addInclude("real_estate_material_price"
                     , "real_estate_register_info_2"
                     , "real_estate_material"
                     , "real_material_completed"
                     , "real_estate_material_programme_batch"
                     , "real_estate_material_programme_batch_file"
-                    , "real_estate_transfer_payment");
+                    , "real_estate_transfer_payment");*/
 
             if (generatorConfigAdapter.isSkipView()) {
                 builder.enableSkipView();
