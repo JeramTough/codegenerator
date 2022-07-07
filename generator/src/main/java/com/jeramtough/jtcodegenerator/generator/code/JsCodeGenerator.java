@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtlog.with.WithLogger;
 
 import java.util.function.Consumer;
@@ -28,24 +30,14 @@ public class JsCodeGenerator extends BaseCodeGenerator implements CodeGenerator,
         return GeneratorTag.JS;
     }
 
-    @Override
-    protected CustomCodeGenerator initCustomCodeGenerator(
-            GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter) {
-        return new JsCustomCodeGenerator(tag, generatorConfigAdapter);
-    }
-
 
     @Override
     protected void initFastAutoGenerator(FastAutoGenerator fastAutoGenerator) {
 
-        //模板设置
+        //模板设置,全部不生成
         fastAutoGenerator.templateConfig(
                 (Consumer<TemplateConfig.Builder>) TemplateConfig.Builder::disable);
 
-        //自定义内容
-        fastAutoGenerator.injectionConfig(builder -> builder.beforeOutputFile(
-                (tableInfo, objectMap) -> super.customCodeGenerator.addTable(tableInfo,
-                        objectMap)));
 
     }
 }

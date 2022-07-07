@@ -1,6 +1,7 @@
 package com.jeramtough.jtcodegenerator.generator.custom;
 
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 public interface CustomCodeGenerator {
 
-    void addTable(TableInfo tableInfo, Map<String, Object> objectMap);
+    EachTableInfo addTable(TableInfo tableInfo, Map<String, Object> objectMap);
 
     void execute();
 }

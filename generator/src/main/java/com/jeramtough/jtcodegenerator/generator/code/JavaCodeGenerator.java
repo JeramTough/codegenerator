@@ -6,6 +6,8 @@ import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.JavaCustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtlog.with.WithLogger;
 
 /**
@@ -26,11 +28,6 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
         return GeneratorTag.JAVA;
     }
 
-    @Override
-    protected CustomCodeGenerator initCustomCodeGenerator(
-            GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter) {
-        return new JavaCustomCodeGenerator(tag, generatorConfigAdapter);
-    }
 
     @Override
     protected void initFastAutoGenerator(FastAutoGenerator fastAutoGenerator) {
@@ -65,14 +62,6 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
                     .mapper("/templates/JAVA/jt/Mapper.java")
                     .mapperXml("/templates/JAVA/jt/mapper.xml")
                     .controller("/templates/JAVA/jt/Controller.java");
-        });
-
-        //自定义内容
-        fastAutoGenerator.injectionConfig(builder -> {
-            builder.beforeOutputFile((tableInfo, objectMap) -> {
-                getLogger().verbose("正在生成" + tableInfo.getEntityName() + "...");
-                super.customCodeGenerator.addTable(tableInfo, objectMap);
-            });
         });
 
         //设置策略

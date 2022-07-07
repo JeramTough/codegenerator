@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtcomponent.utils.StringUtil;
 import com.jeramtough.jtlog.with.WithLogger;
 import com.jeramtough.jtcodegenerator.generator.typeconvert.CzPostgreSqlTypeConvert;
@@ -29,16 +32,11 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
         return GeneratorTag.CZ_JAVA;
     }
 
+
     @Override
     protected void initDataSourceConfig(DataSourceConfig.Builder builder) {
         //类型转换器
         builder.typeConvert(new CzPostgreSqlTypeConvert());
-    }
-
-    @Override
-    protected CustomCodeGenerator initCustomCodeGenerator(
-            GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter) {
-        return new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter);
     }
 
     @Override
@@ -81,13 +79,6 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
                     .controller("/templates/JAVA/jt/Controller.java");
         });
 
-        //自定义内容
-        fastAutoGenerator.injectionConfig(builder -> {
-            builder.beforeOutputFile((tableInfo, objectMap) -> {
-                getLogger().verbose("正在生成" + tableInfo.getEntityName() + "...");
-                super.customCodeGenerator.addTable(tableInfo, objectMap);
-            });
-        });
 
         //设置策略
         fastAutoGenerator.strategyConfig(builder -> {
@@ -97,10 +88,10 @@ public class CzJavaCodeGenerator extends BaseCodeGenerator
 
             builder.entityBuilder()
                    .formatFileName("%sPO")
-                   .addIgnoreColumns("lot_no" , "fingerprint_key" , "active_at" , "import_year"
-                           , "import_month" , "created_by" , "updated_by" , "deleted_by" ,
-                           "created_at" ,
-                           "updated_at" , "deleted_at");
+                   .addIgnoreColumns("lot_no", "fingerprint_key", "active_at", "import_year"
+                           , "import_month", "created_by", "updated_by", "deleted_by",
+                           "created_at",
+                           "updated_at", "deleted_at");
 
             //只生成这些表
             builder.addInclude("real_estate_material_price"

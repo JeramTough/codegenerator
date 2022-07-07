@@ -36,26 +36,27 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
      */
     protected BaseCustomCodeGenerator(
             GeneratorTag tag,
-            GeneratorConfigAdapter generatorConfigAdapter) {
+            GeneratorConfigAdapter generatorConfigAdapter,
+            TemplateParamsInitializer templateParamsInitializer) {
         this.tag = tag;
         this.generatorConfigAdapter = generatorConfigAdapter;
         pathHandler = new PathHandler(generatorConfigAdapter.getOutputDir());
 
-        this.templateParamsInitializer = initTemplateParamsInitializer();
+        this.templateParamsInitializer = templateParamsInitializer;
         initTemplates(jtTemplateList);
     }
 
-    protected abstract TemplateParamsInitializer initTemplateParamsInitializer();
 
     protected abstract void initTemplates(List<JtTemplate> jtTemplateList);
 
 
     @Override
-    public void addTable(TableInfo tableInfo, Map<String, Object> objectMap) {
+    public EachTableInfo addTable(TableInfo tableInfo, Map<String, Object> objectMap) {
 
         //config.packageConfig.parent
         EachTableInfo eachTableInfo = new EachTableInfo(tableInfo, objectMap);
         eachTableInfoList.add(eachTableInfo);
+        return eachTableInfo;
     }
 
 

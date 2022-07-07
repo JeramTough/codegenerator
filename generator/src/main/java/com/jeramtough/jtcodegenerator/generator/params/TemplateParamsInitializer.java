@@ -17,6 +17,7 @@ public interface TemplateParamsInitializer {
 
     /**
      * 每个数据库表都设置一遍，对应那种controller，entity这种一张表就生成一个对象
+     * @param jtTemplate  jtTemplate有可能是null的
      */
     void setParamsForEachTable(
             JtTemplate jtTemplate,

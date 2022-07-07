@@ -22,14 +22,11 @@ public class JsCustomCodeGenerator extends BaseCustomCodeGenerator {
 
     public JsCustomCodeGenerator(
             GeneratorTag tag,
-            GeneratorConfigAdapter generatorConfigAdapter) {
-        super(tag, generatorConfigAdapter);
+            GeneratorConfigAdapter generatorConfigAdapter,
+            TemplateParamsInitializer templateParamsInitializer) {
+        super(tag, generatorConfigAdapter,templateParamsInitializer);
     }
 
-    @Override
-    protected TemplateParamsInitializer initTemplateParamsInitializer() {
-        return new JtTemplateParamsInitializer();
-    }
     @Override
     protected void initTemplates(
             List<JtTemplate> jtTemplateList) {

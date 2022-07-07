@@ -32,7 +32,7 @@ public class BaseTemplateParamsInitializer implements TemplateParamsInitializer 
         ConfigBuilder config = (ConfigBuilder) objectMap.get("config");
         PackageConfig packageConfig = config.getPackageConfig();
 
-        String templatePackageName =
+        String templatePackageName = jtTemplate==null?"":
                 jtTemplate.getPackageName(eachTableInfo);
         String basePackName = generatorConfigAdapter.getBasePackageName();
 

@@ -22,13 +22,9 @@ public class CzJavaCustomCodeGenerator extends BaseCustomCodeGenerator {
 
     public CzJavaCustomCodeGenerator(
             GeneratorTag tag,
-            GeneratorConfigAdapter generatorConfigAdapter) {
-        super(tag, generatorConfigAdapter);
-    }
-
-    @Override
-    protected TemplateParamsInitializer initTemplateParamsInitializer() {
-        return new CzTemplateParamsInitializer();
+            GeneratorConfigAdapter generatorConfigAdapter,
+            TemplateParamsInitializer templateParamsInitializer) {
+        super(tag, generatorConfigAdapter,templateParamsInitializer);
     }
 
     @Override

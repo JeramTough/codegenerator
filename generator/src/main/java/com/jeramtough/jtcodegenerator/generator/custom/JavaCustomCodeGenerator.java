@@ -19,13 +19,9 @@ public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
 
 
     public JavaCustomCodeGenerator(GeneratorTag tag,
-                                   GeneratorConfigAdapter generatorConfigAdapter) {
-        super(tag, generatorConfigAdapter);
-    }
-
-    @Override
-    protected TemplateParamsInitializer initTemplateParamsInitializer() {
-        return new JtTemplateParamsInitializer();
+                                   GeneratorConfigAdapter generatorConfigAdapter,
+                                   TemplateParamsInitializer templateParamsInitializer) {
+        super(tag, generatorConfigAdapter,templateParamsInitializer);
     }
 
     @Override
