@@ -69,7 +69,7 @@ public class CzHupuJavaCodeGenerator extends BaseCodeGenerator
         //模板设置
         fastAutoGenerator.templateConfig(builder -> {
             builder
-                    .entity("/templates/JAVA/cz/PO.java")
+                    .entity("/templates/JAVA/cz/HePuPO.java")
                     .service("/templates/JAVA/cz/Service.java")
                     .serviceImpl("/templates/JAVA/cz/ServiceImpl.java")
                     .mapper("/templates/JAVA/cz/Mapper.java")

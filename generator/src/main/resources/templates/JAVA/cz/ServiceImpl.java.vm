@@ -9,6 +9,7 @@ import ${package.Service}.${table.serviceName};
 import ${boPackage}.${tableModelName}BO;
 import ${voPackage}.${tableModelName}VO;
 import synthesistaxgovernance.web.service.base.impl.BaseDataChipServiceImpl;
+import synthesistaxgovernance.web.service.base.BusinessServiceProvider;
 
 /**
  * <p>
@@ -18,7 +19,8 @@ import synthesistaxgovernance.web.service.base.impl.BaseDataChipServiceImpl;
  * @author ${author}
  * @since ${date}
  */
-@Service
+@Service(${tableModelName}BO.DATA_FRAGMENTS_CODE +
+        BusinessServiceProvider.BUSINESS_SERVICE_BEAN_SUFFIX)
 public class ${table.serviceImplName}
         extends BaseDataChipServiceImpl
         <${table.mapperName},

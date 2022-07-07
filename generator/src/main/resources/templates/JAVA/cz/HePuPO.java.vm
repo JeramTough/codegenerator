@@ -18,7 +18,7 @@ import synthesistaxgovernance.datasource.generatetable.annotation.TableInfo;
  * @since ${date}
  */
 #if(${table.convert})
-@TableName("${table.name}")
+@TableName("hepu_${table.name}")
 #end
 @TableInfo(comment = "$!{table.comment}")
 public class ${entity} extends AbstractDataChipPersistenceModel {
