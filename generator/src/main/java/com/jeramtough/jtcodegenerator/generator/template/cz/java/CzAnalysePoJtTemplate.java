@@ -14,28 +14,26 @@ import java.util.*;
  * by @author WeiBoWen
  * </pre>
  */
-public class CzBoJtTemplate extends BaseJtTemplate {
+public class CzAnalysePoJtTemplate extends BaseJtTemplate {
 
-    public CzBoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+    public CzAnalysePoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
         super(generatorConfigAdapter);
     }
 
     @Override
     public String getTemplatePath() {
-        return "templates/JAVA/cz/BO.java.vm";
+        return "templates/JAVA/cz/AnalysePO.java.vm";
     }
 
     @Override
     public String getPackageName(EachTableInfo eachTableInfo) {
-        return "model.datachip" + (StringUtil.isEmpty(
-                getGeneratorConfigAdapter().getBusinessPrefix()) ? "" :
-                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".bo";
+        return "datasource.po.analyse.drischool";
     }
 
     @Override
     public String getFileName(EachTableInfo eachTableInfo) {
         String tableModelName = (String) eachTableInfo.getObjectMap().get("tableModelName");
-        return tableModelName + "BO.java";
+        return "Analyse"+tableModelName + "PO.java";
     }
 
     @Override

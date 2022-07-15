@@ -1,0 +1,23 @@
+package ${customModulePackageName};
+
+import synthesistaxgovernance.datasource.po.analyse.drischool.Analyse${entity};
+import ${superMapperClassPackage};
+#if(${mapperAnnotation})
+import org.apache.ibatis.annotations.Mapper;
+#end
+import org.springframework.stereotype.Repository;
+
+/**
+ * <p>
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Repository
+#if(${mapperAnnotation})
+@Mapper
+#end
+public interface Analyse${table.mapperName} extends ${superMapperClass}<Analyse${entity}> {
+
+}

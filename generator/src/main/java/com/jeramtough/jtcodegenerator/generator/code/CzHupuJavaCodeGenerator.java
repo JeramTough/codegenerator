@@ -1,5 +1,9 @@
 package com.jeramtough.jtcodegenerator.generator.code;
 
+import cn.hutool.core.io.IoUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
@@ -11,6 +15,12 @@ import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitia
 import com.jeramtough.jtcodegenerator.generator.typeconvert.CzPostgreSqlTypeConvert;
 import com.jeramtough.jtcomponent.utils.StringUtil;
 import com.jeramtough.jtlog.with.WithLogger;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <pre>
@@ -28,7 +38,7 @@ public class CzHupuJavaCodeGenerator extends BaseCodeGenerator
 
     @Override
     protected GeneratorTag initTag() {
-        return GeneratorTag.CZ_JAVA;
+        return GeneratorTag.CZ_HEPU_JAVA;
     }
 
 
@@ -98,13 +108,22 @@ public class CzHupuJavaCodeGenerator extends BaseCodeGenerator
                            "updated_at" , "deleted_at");
 
             //只生成这些表
-          /*  builder.addInclude("real_estate_material_price"
-                    , "real_estate_register_info_2"
-                    , "real_estate_material"
-                    , "real_material_completed"
-                    , "real_estate_material_programme_batch"
-                    , "real_estate_material_programme_batch_file"
-                    , "real_estate_transfer_payment");*/
+           /* List<String> tableList=new ArrayList<>();
+            try {
+                JSONObject jsonObject=JSON.parseObject(IoUtil.read(new FileInputStream(
+                        "/home/jeramtough/桌面/hepu/masterplate_basic.json"),
+                        StandardCharsets.UTF_8));
+                JSONArray jsonArray=jsonObject.getJSONArray("RECORDS");
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    JSONObject each=jsonArray.getJSONObject(i);
+                    String table=each.getString("data_object");
+                    tableList.add(table);
+                }
+            }
+            catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            builder.addInclude(tableList);*/
 
             if (generatorConfigAdapter.isSkipView()) {
                 builder.enableSkipView();

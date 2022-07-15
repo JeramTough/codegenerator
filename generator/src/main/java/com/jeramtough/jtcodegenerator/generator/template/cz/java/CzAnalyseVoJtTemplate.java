@@ -14,28 +14,28 @@ import java.util.*;
  * by @author WeiBoWen
  * </pre>
  */
-public class CzBoJtTemplate extends BaseJtTemplate {
+public class CzAnalyseVoJtTemplate extends BaseJtTemplate {
 
-    public CzBoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+    public CzAnalyseVoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
         super(generatorConfigAdapter);
     }
 
     @Override
     public String getTemplatePath() {
-        return "templates/JAVA/cz/BO.java.vm";
+        return "templates/JAVA/cz/AnalyseVO.java.vm";
     }
 
     @Override
     public String getPackageName(EachTableInfo eachTableInfo) {
-        return "model.datachip" + (StringUtil.isEmpty(
+        return "api.model.analyse" + (StringUtil.isEmpty(
                 getGeneratorConfigAdapter().getBusinessPrefix()) ? "" :
-                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".bo";
+                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".vo";
     }
 
     @Override
     public String getFileName(EachTableInfo eachTableInfo) {
         String tableModelName = (String) eachTableInfo.getObjectMap().get("tableModelName");
-        return tableModelName + "BO.java";
+        return "Analyse"+tableModelName + "VO.java";
     }
 
     @Override

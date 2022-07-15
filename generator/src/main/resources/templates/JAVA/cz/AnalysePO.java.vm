@@ -1,0 +1,30 @@
+package ${customModulePackageName};
+
+#foreach($pkg in ${table.importPackages})
+import ${pkg};
+#end
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.IdType;
+import synthesistaxgovernance.datasource.jpa.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+/**
+ * <p>
+ *  Analyse${entity} 分析报表PO
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${table.convert})
+@TableName(value ="analyse_${table.name}", autoResultMap = true)
+#end
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Analyse${entity} extends AbstractEntity {
+
+#if(${entitySerialVersionUID})
+    private static final long serialVersionUID=1L;
+#end
+
+}

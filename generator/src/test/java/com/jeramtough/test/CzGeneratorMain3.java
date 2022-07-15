@@ -2,7 +2,6 @@ package com.jeramtough.test;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.CodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.CzHupuJavaCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
 
 /**
@@ -11,7 +10,7 @@ import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
  * by @author WeiBoWen
  * </pre>
  */
-public class CzHupuGeneratorMain {
+public class CzGeneratorMain3 {
 
     public static void main(String[] args) {
         GeneratorConfigAdapter generatorConfigAdapter = new GeneratorConfigAdapter() {
@@ -22,7 +21,7 @@ public class CzHupuGeneratorMain {
 
             @Override
             public String getBusinessPrefix() {
-                return "hepu";
+                return null;
             }
 
             @Override
@@ -44,7 +43,7 @@ public class CzHupuGeneratorMain {
             @Override
             public String getUrl() {
 //                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
-                return "jdbc:mysql://127.0.0.1:3306/hepu-data-collection" +
+                return "jdbc:mysql://127.0.0.1:3306/test_db2" +
                         "?useUnicode=true" +
                         "&useSSL=false&characterEncoding=utf8";
             }
@@ -62,7 +61,7 @@ public class CzHupuGeneratorMain {
 
         };
 
-        CodeGenerator javaCodeGenerator = new CzHupuJavaCodeGenerator(generatorConfigAdapter);
+        CodeGenerator javaCodeGenerator = new CzJavaCodeGenerator(generatorConfigAdapter);
 
         javaCodeGenerator.generating();
     }

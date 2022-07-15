@@ -1,0 +1,95 @@
+package ${customModulePackageName};
+
+import me.insidezhou.southernquiet.logging.SouthernQuietLogger;
+import me.insidezhou.southernquiet.logging.SouthernQuietLoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import me.insidezhou.southernquiet.util.IdGenerator;
+import org.springframework.stereotype.Service;
+import ${package.Entity}.drischool.${entity};
+import ${package.Mapper}.drischool.${table.mapperName};
+import ${package.Service}.drischool.${table.serviceName};
+import ${boPackage}.${tableModelName}BO;
+import ${voPackage}.${tableModelName}VO;
+import synthesistaxgovernance.datasource.mapper.TemplateImportValidateRecordMapper;
+import synthesistaxgovernance.datasource.po.analyse.drischool.Analyse${tableModelName}PO;
+import synthesistaxgovernance.datasource.mapper.analyse.Analyse${tableModelName}Mapper;
+import synthesistaxgovernance.datasource.mapper.datachip.realestate.ProjectMapper;
+import synthesistaxgovernance.web.service.datacleaning.BaseDataCleaningRealestateService;
+import synthesistaxgovernance.web.service.base.DataCleaningBusinessServiceProvider;
+import synthesistaxgovernance.web.service.datachip.wood.WoodEnterpriseChipService;
+import synthesistaxgovernance.api.model.notification.drischool.${tableModelName}FragmentNotification;
+
+import java.util.List;
+/**
+ * <p>
+ * $!{table.comment} 数据清洗服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service(${tableModelName}BO.DATA_FRAGMENTS_CODE +
+        DataCleaningBusinessServiceProvider.BUSINESS_SERVICE_BEAN_SUFFIX)
+public class  DataCleaning${table.serviceName}
+extends BaseDataCleaningRealestateService
+<${tableModelName}FragmentNotification,
+    ${tableModelName}BO,
+    ${entity},
+        Analyse${tableModelName}PO>{
+
+    private static final SouthernQuietLogger LOGGER = SouthernQuietLoggerFactory.getLogger(DataCleaning${table.serviceName}.class);
+
+    private final ${table.serviceName} ${firstLowerTableModelName}Service;
+    private final Analyse${tableModelName}Mapper analyse${tableModelName}Mapper;
+
+    private final ProjectMapper projectMapper;
+
+    private final WoodEnterpriseChipService woodEnterpriseChipService;
+
+@Autowired
+public DataCleaning${table.serviceName}(
+        TemplateImportValidateRecordMapper templateImportValidateRecordMapper,
+        IdGenerator idGenerator,
+    ${table.serviceName} ${firstLowerTableModelName}Service,
+    Analyse${tableModelName}Mapper analyse${tableModelName}Mapper,
+    ProjectMapper projectMapper,
+    WoodEnterpriseChipService woodEnterpriseChipService
+) {
+    super(templateImportValidateRecordMapper, idGenerator);
+
+    this.${firstLowerTableModelName}Service = ${firstLowerTableModelName}Service;
+    this.analyse${tableModelName}Mapper = analyse${tableModelName}Mapper;
+    this.projectMapper = projectMapper;
+    this.woodEnterpriseChipService = woodEnterpriseChipService;
+}
+
+    public void save(
+            Analyse${tableModelName}PO analyse${tableModelName}PO,
+            ${tableModelName}PO ${firstLowerTableModelName}PO) {
+
+    }
+
+    @Override
+    public void execute(
+                ${tableModelName}FragmentNotification fragmentNotification) {
+
+    }
+
+    @Override
+    public void regularInspection() {
+
+    }
+
+    @Override
+    protected void fire(List<${tableModelName}BO> list) {
+
+    }
+
+    @Override
+    protected Analyse${tableModelName}PO businessIntegrityCheck(Long id,
+                                                                ${tableModelName}PO ${firstLowerTableModelName}PO) {
+        return null;
+    }
+
+
+        }

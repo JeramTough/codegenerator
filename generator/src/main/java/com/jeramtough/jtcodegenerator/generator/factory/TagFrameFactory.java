@@ -7,6 +7,7 @@ import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator
 import com.jeramtough.jtcodegenerator.generator.custom.JavaCustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.cz.CzHePuTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 
@@ -22,6 +23,7 @@ public class TagFrameFactory {
         return switch (tag) {
             case JAVA, JS -> new JtTemplateParamsInitializer();
             case CZ_JAVA -> new CzTemplateParamsInitializer();
+            case CZ_HEPU_JAVA -> new CzHePuTemplateParamsInitializer();
         };
     }
 
@@ -35,6 +37,8 @@ public class TagFrameFactory {
             case JAVA -> new JavaCustomCodeGenerator(tag, generatorConfigAdapter,
                     templateParamsInitializer);
             case CZ_JAVA -> new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,
+                    templateParamsInitializer);
+            case CZ_HEPU_JAVA -> new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,
                     templateParamsInitializer);
             case JS -> new JsCustomCodeGenerator(tag, generatorConfigAdapter,
                     templateParamsInitializer);

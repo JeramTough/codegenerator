@@ -6,7 +6,10 @@ import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
 import com.jeramtough.jtcomponent.utils.StringUtil;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <pre>
@@ -14,28 +17,28 @@ import java.util.*;
  * by @author WeiBoWen
  * </pre>
  */
-public class CzBoJtTemplate extends BaseJtTemplate {
+public class CzFragmentNotificationJtTemplate extends BaseJtTemplate {
 
-    public CzBoJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+    public CzFragmentNotificationJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
         super(generatorConfigAdapter);
     }
 
     @Override
     public String getTemplatePath() {
-        return "templates/JAVA/cz/BO.java.vm";
+        return "templates/JAVA/cz/FragmentNotification.java.vm";
     }
 
     @Override
     public String getPackageName(EachTableInfo eachTableInfo) {
-        return "model.datachip" + (StringUtil.isEmpty(
+        return "api.datachip.model.notification" + (StringUtil.isEmpty(
                 getGeneratorConfigAdapter().getBusinessPrefix()) ? "" :
-                "." + getGeneratorConfigAdapter().getBusinessPrefix()) + ".bo";
+                "." + getGeneratorConfigAdapter().getBusinessPrefix())+".drischool";
     }
 
     @Override
     public String getFileName(EachTableInfo eachTableInfo) {
         String tableModelName = (String) eachTableInfo.getObjectMap().get("tableModelName");
-        return tableModelName + "BO.java";
+        return tableModelName + "FragmentNotification.java";
     }
 
     @Override
@@ -51,39 +54,6 @@ public class CzBoJtTemplate extends BaseJtTemplate {
 
         Set<String> importPackagesSet = eachTableInfo.getTableInfo().getImportPackages();
         importPackagesSet.removeIf(filterImportPackagesSet::contains);
-
-        //过滤不需要的字段
-        Set<String> filterFieldSet = new HashSet<>(
-                Arrays.asList(
-                        "id",
-                        "import_year"
-                        , "import_month"
-                        , "unifiedSocialCreditIdentifier"
-                        , "lot_no"
-                        , "status"
-                        , "del_flag"
-                        , "create_by"
-                        , "update_by"
-                        , "create_time"
-                        , "update_time"
-                        , "fingerprint_key"
-                        , "active_at"));
-
-        List<TableField> tableFieldList =
-                eachTableInfo.getTableInfo().getFields();
-
-        List<TableField> removedList = new ArrayList<>();
-        for (int i = 0; i < tableFieldList.size(); i++) {
-            TableField tableField = tableFieldList.get(i);
-
-            if (filterFieldSet.contains(tableField.getName())) {
-                removedList.add(tableField);
-            }
-        }
-
-        for (TableField tableField : removedList) {
-            tableFieldList.remove(tableField);
-        }
 
     }
 }

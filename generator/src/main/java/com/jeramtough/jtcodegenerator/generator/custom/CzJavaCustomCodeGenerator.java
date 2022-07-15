@@ -5,9 +5,7 @@ import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
 import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzAddOrUpFormJtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzBoJtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.cz.java.CzVoJtTemplate;
+import com.jeramtough.jtcodegenerator.generator.template.cz.java.*;
 
 import java.util.List;
 
@@ -33,6 +31,11 @@ public class CzJavaCustomCodeGenerator extends BaseCustomCodeGenerator {
         this.jtTemplateList.add(new CzBoJtTemplate(super.generatorConfigAdapter));
         this.jtTemplateList.add(new CzVoJtTemplate(super.generatorConfigAdapter));
         this.jtTemplateList.add(new CzAddOrUpFormJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzFragmentNotificationJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzAnalysePoJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzAnalyseMapperJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzDataCleaningRealestateServiceJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CzAnalyseVoJtTemplate(super.generatorConfigAdapter));
     }
 
 }

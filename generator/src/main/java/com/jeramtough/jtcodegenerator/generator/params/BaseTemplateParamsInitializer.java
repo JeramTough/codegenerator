@@ -72,6 +72,9 @@ public class BaseTemplateParamsInitializer implements TemplateParamsInitializer 
 
 
         if (businessPrefix.length() == 0) {
+            String firstChar = firstUpperTableModelName.charAt(0) + "";
+            firstLowerTableModelName =
+                    firstChar.toLowerCase()+firstLowerTableModelName.substring(1);
             objectMap.put("firstLowerTableModelName" , firstLowerTableModelName);
         }
         else {

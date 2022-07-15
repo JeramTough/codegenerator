@@ -38,16 +38,19 @@ public class CzTemplateParamsInitializer extends BaseTemplateParamsInitializer {
                 "." + generatorConfigAdapter.getBusinessPrefix());
         String voPackage =
                 generatorConfigAdapter.getBasePackageName() + ".api.model.datachip" +
+                        ".drischool"+
                         businessPrefixPackageName +
                         ".vo";
         objectMap.put("voPackage", voPackage);
         String boPackage =
                 generatorConfigAdapter.getBasePackageName() + ".api.model.datachip" +
+                        ".drischool"+
                         businessPrefixPackageName +
                         ".bo";
         objectMap.put("boPackage", boPackage);
         String requestPackage =
                 generatorConfigAdapter.getBasePackageName() + ".api.model.datachip" +
+                        ".drischool"+
                         businessPrefixPackageName +
                         ".request";
         objectMap.put("requestPackage", requestPackage);
