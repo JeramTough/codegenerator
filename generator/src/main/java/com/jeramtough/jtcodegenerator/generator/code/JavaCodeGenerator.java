@@ -1,17 +1,14 @@
 package com.jeramtough.jtcodegenerator.generator.code;
 
-import cn.hutool.core.io.FileUtil;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
 import com.jeramtough.jtcodegenerator.generator.custom.JavaCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.path.PathHandler;
-import com.jeramtough.jtcodegenerator.generator.util.MyIoUtil;
-import com.jeramtough.jtcomponent.io.Directory;
+import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtlog.with.WithLogger;
-
-import javax.sql.DataSource;
 
 /**
  * <pre>
@@ -30,6 +27,7 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
     protected GeneratorTag initTag() {
         return GeneratorTag.JAVA;
     }
+
 
     @Override
     protected void initFastAutoGenerator(FastAutoGenerator fastAutoGenerator) {
@@ -64,14 +62,6 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
                     .mapper("/templates/JAVA/jt/Mapper.java")
                     .mapperXml("/templates/JAVA/jt/mapper.xml")
                     .controller("/templates/JAVA/jt/Controller.java");
-        });
-
-        //自定义内容
-        fastAutoGenerator.injectionConfig(builder -> {
-            builder.beforeOutputFile((tableInfo, objectMap) -> {
-                getLogger().verbose("正在生成" + tableInfo.getEntityName() + "...");
-                super.customCodeGenerator.addTable(tableInfo, objectMap);
-            });
         });
 
         //设置策略

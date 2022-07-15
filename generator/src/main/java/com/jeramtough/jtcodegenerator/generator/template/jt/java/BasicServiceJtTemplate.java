@@ -1,5 +1,6 @@
-package com.jeramtough.jtcodegenerator.generator.template.java;
+package com.jeramtough.jtcodegenerator.generator.template.jt.java;
 
+import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
 
@@ -11,18 +12,22 @@ import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
  */
 public class BasicServiceJtTemplate extends BaseJtTemplate {
 
+    public BasicServiceJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+        super(generatorConfigAdapter);
+    }
+
     @Override
-    protected String getTemplatePath() {
+    public String getTemplatePath() {
         return "templates/JAVA/jt/MyBaseService.java.vm";
     }
 
     @Override
-    protected String getPackageName(EachTableInfo eachTableInfo) {
+    public String getPackageName(EachTableInfo eachTableInfo) {
         return "service.base";
     }
 
     @Override
-    protected String getFileName(EachTableInfo eachTableInfo) {
+    public String getFileName(EachTableInfo eachTableInfo) {
         return "MyBaseService.java";
     }
 }

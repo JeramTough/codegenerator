@@ -20,6 +20,11 @@ public class ImGeneratorMain {
             }
 
             @Override
+            public String getBusinessPrefix() {
+                return null;
+            }
+
+            @Override
             public boolean isSkipView() {
                 return false;
             }

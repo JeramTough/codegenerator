@@ -2,8 +2,10 @@ package com.jeramtough.jtcodegenerator.generator.custom;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
+import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
+import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
-import com.jeramtough.jtcodegenerator.generator.template.java.*;
+import com.jeramtough.jtcodegenerator.generator.template.jt.java.*;
 
 import java.util.List;
 
@@ -16,21 +18,20 @@ import java.util.List;
 public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
 
 
-    public JavaCustomCodeGenerator(
-            GeneratorTag tag,
-            GeneratorConfigAdapter generatorConfigAdapter) {
-        super(tag, generatorConfigAdapter);
+    public JavaCustomCodeGenerator(GeneratorTag tag,
+                                   GeneratorConfigAdapter generatorConfigAdapter,
+                                   TemplateParamsInitializer templateParamsInitializer) {
+        super(tag, generatorConfigAdapter,templateParamsInitializer);
     }
 
     @Override
-    protected void initTemplates(
-            List<JtTemplate> jtTemplateList) {
-        this.jtTemplateList.add(new DtoJtTemplate());
-        this.jtTemplateList.add(new BasicControllerJtTemplate());
-        this.jtTemplateList.add(new AddOrUpdateParamsJtTemplate());
-        this.jtTemplateList.add(new CoditionParamsJtTemplate());
-        this.jtTemplateList.add(new BasicServiceJtTemplate());
-        this.jtTemplateList.add(new BasicServiceImplJtTemplate());
+    protected void initTemplates(List<JtTemplate> jtTemplateList) {
+        this.jtTemplateList.add(new DtoJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new BasicControllerJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new AddOrUpdateParamsJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new CoditionParamsJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new BasicServiceJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new BasicServiceImplJtTemplate(super.generatorConfigAdapter));
     }
 
 }

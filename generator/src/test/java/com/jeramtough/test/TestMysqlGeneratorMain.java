@@ -19,6 +19,10 @@ public class TestMysqlGeneratorMain {
                 return "synthesistaxgovernance.realestate";
             }
 
+            @Override
+            public String getBusinessPrefix() {
+                return null;
+            }
 
             @Override
             public boolean isSkipView() {

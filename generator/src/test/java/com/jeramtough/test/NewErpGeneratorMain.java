@@ -20,6 +20,11 @@ public class NewErpGeneratorMain {
             }
 
             @Override
+            public String getBusinessPrefix() {
+                return null;
+            }
+
+            @Override
             public boolean isSkipView() {
                 return true;
             }

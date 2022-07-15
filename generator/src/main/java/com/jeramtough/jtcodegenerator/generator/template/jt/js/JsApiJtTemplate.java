@@ -1,5 +1,6 @@
-package com.jeramtough.jtcodegenerator.generator.template.js;
+package com.jeramtough.jtcodegenerator.generator.template.jt.js;
 
+import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
 
@@ -11,20 +12,24 @@ import com.jeramtough.jtcodegenerator.generator.template.BaseJtTemplate;
  */
 public class JsApiJtTemplate extends BaseJtTemplate {
 
+    public JsApiJtTemplate(GeneratorConfigAdapter generatorConfigAdapter) {
+        super(generatorConfigAdapter);
+    }
+
     @Override
-    protected String getTemplatePath() {
+    public String getTemplatePath() {
         return "templates/JS/jt/Api.js.vm";
     }
 
     @Override
-    protected String getPackageName(EachTableInfo eachTableInfo) {
+    public String getPackageName(EachTableInfo eachTableInfo) {
         String projectName = (String) eachTableInfo.getObjectMap().get("projectName");
 
         return "api." + projectName;
     }
 
     @Override
-    protected String getFileName(EachTableInfo eachTableInfo) {
+    public String getFileName(EachTableInfo eachTableInfo) {
         return eachTableInfo.getTableInfo().getEntityName() + "Api.js";
     }
 }

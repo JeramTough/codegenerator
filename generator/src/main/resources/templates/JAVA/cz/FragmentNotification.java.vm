@@ -1,0 +1,38 @@
+package ${customModulePackageName};
+
+#foreach($pkg in ${table.importPackages})
+import ${pkg};
+#end
+import java.io.Serializable;
+import synthesistaxgovernance.api.model.datachip.drischool.bo.${tableModelName}BO;
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 通知类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public class ${tableModelName}FragmentNotification implements Serializable {
+
+#if(${entitySerialVersionUID})
+    private static final long serialVersionUID=1L;
+#end
+
+    private List<${tableModelName}BO> fragmentList;
+
+    public ${tableModelName}FragmentNotification(List<${tableModelName}BO> fragmentList) {
+        this.fragmentList = fragmentList;
+    }
+
+    public List<${tableModelName}BO> getFragmentList() {
+        return fragmentList;
+    }
+
+    public void setFragmentList(List<${tableModelName}BO> fragmentList) {
+        this.fragmentList = fragmentList;
+    }
+
+}
