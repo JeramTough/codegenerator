@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.bean.EachTableInfo;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
+import com.jeramtough.jtcodegenerator.generator.util.JtStringUtil;
 import com.jeramtough.jtcomponent.utils.StringUtil;
 
 import java.lang.reflect.Field;
@@ -64,7 +65,7 @@ public class BaseTemplateParamsInitializer implements TemplateParamsInitializer 
         }
 
 
-        String tableModelName = StringUtil.lineToHump(eachTableInfo.getTableInfo().getName(),
+        String tableModelName = JtStringUtil.lineToHump(eachTableInfo.getTableInfo().getName(),
                 true);
         String firstUpperTableModelName = firstUpperBusinessPrefix + tableModelName;
         String firstLowerTableModelName = firstLowerBusinessPrefix + tableModelName;

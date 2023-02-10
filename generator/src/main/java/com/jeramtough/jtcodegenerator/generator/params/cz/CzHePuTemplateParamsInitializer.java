@@ -122,37 +122,6 @@ public class CzHePuTemplateParamsInitializer extends BaseTemplateParamsInitializ
                         ".request";
         objectMap.put("requestPackage", requestPackage);
 
-        //模板信息
-        JSONObject templateInfo = tableNameKeyTemplateInfoMap.get(tableName);
-        String excelName = templateInfo.getString("masterplate_name");
-        objectMap.put("excelName", excelName);
-
-        List<JSONObject> params = tableNameKeyParamsMap.get(tableName);
-        List<TableField> fieldList = tableInfo.getFields();
-
-        List<TableField> fieldList2 = new ArrayList<>();
-
-        Map<String, TableField> columnNameKeyFieldMap = fieldList
-                .stream()
-                .collect(
-                        Collectors.toMap(TableField::getColumnName, tableField -> tableField));
-
-        Map<String, JSONObject> columnNameKeyFieldMap2 = new HashMap<>();
-        for (JSONObject param : params) {
-            String columnName = param.getString("attribute_name");
-            columnNameKeyFieldMap2.put(columnName, param);
-        }
-
-        for (Map.Entry<String, JSONObject> entry : columnNameKeyFieldMap2.entrySet()) {
-            TableField tableField=columnNameKeyFieldMap.get(entry.getKey());
-            fieldList2.add(tableField);
-        }
-
-
-        fieldList.clear();
-        fieldList.addAll(fieldList2);
-
-
         //只有创展才要这样干
         for (TableField tableField : eachTableInfo.getTableInfo().getFields()) {
             if ("id".equals(tableField.getName())) {

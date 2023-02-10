@@ -36,11 +36,18 @@ public class PathHandler {
     }
 
     public String getOutputPath(GeneratorTag tag) {
-        return switch (tag) {
-            case JAVA -> getJavaOutputPath();
-            case JS -> getJsOutputPath();
-            case CZ_JAVA,CZ_HEPU_JAVA -> getJavaOutputPath();
-        };
+        switch (tag) {
+            case JAVA:
+                return getJavaOutputPath();
+            case JS:
+                return getJsOutputPath();
+            case CZ_JAVA:
+                return getJavaOutputPath();
+            case CZ_HEPU_JAVA:
+                return getJavaOutputPath();
+            default:
+                throw new IllegalStateException();
+        }
     }
 
     //**************

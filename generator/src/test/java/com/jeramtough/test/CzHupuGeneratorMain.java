@@ -44,7 +44,7 @@ public class CzHupuGeneratorMain {
             @Override
             public String getUrl() {
 //                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
-                return "jdbc:mysql://127.0.0.1:3306/hepu-data-collection" +
+                return "jdbc:mysql://192.168.8.212:3307/hepu-data-collection" +
                         "?useUnicode=true" +
                         "&useSSL=false&characterEncoding=utf8";
             }
@@ -57,7 +57,7 @@ public class CzHupuGeneratorMain {
             @Override
             public String[] getUsernameAndPassword() {
 //                return new String[]{"postgres", "123456"};
-                return new String[]{"root", "123456"};
+                return new String[]{"root", "root!@#123"};
             }
 
         };

@@ -20,11 +20,18 @@ import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitia
 public class TagFrameFactory {
 
     public static TemplateParamsInitializer getTemplateParamsInitializer(GeneratorTag tag) {
-        return switch (tag) {
-            case JAVA, JS -> new JtTemplateParamsInitializer();
-            case CZ_JAVA -> new CzTemplateParamsInitializer();
-            case CZ_HEPU_JAVA -> new CzHePuTemplateParamsInitializer();
-        };
+        switch (tag) {
+            case JAVA:
+                return new JtTemplateParamsInitializer();
+            case JS:
+                return new JtTemplateParamsInitializer();
+            case CZ_JAVA:
+                return new CzTemplateParamsInitializer();
+            case CZ_HEPU_JAVA:
+                return new CzHePuTemplateParamsInitializer();
+            default:
+                throw new IllegalStateException();
+        }
     }
 
     /**
@@ -33,15 +40,21 @@ public class TagFrameFactory {
     public static CustomCodeGenerator getCustomCodeGenerator(
             GeneratorTag tag, GeneratorConfigAdapter generatorConfigAdapter,
             TemplateParamsInitializer templateParamsInitializer) {
-        return switch (tag) {
-            case JAVA -> new JavaCustomCodeGenerator(tag, generatorConfigAdapter,
-                    templateParamsInitializer);
-            case CZ_JAVA -> new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,
-                    templateParamsInitializer);
-            case CZ_HEPU_JAVA -> new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,
-                    templateParamsInitializer);
-            case JS -> new JsCustomCodeGenerator(tag, generatorConfigAdapter,
-                    templateParamsInitializer);
-        };
+        switch (tag) {
+            case JAVA:
+                return new JavaCustomCodeGenerator(tag, generatorConfigAdapter,
+                        templateParamsInitializer);
+            case CZ_JAVA:
+                return new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,
+                        templateParamsInitializer);
+            case CZ_HEPU_JAVA:
+                return new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,
+                        templateParamsInitializer);
+            case JS:
+                return new JsCustomCodeGenerator(tag, generatorConfigAdapter,
+                        templateParamsInitializer);
+            default:
+                throw new IllegalStateException();
+        }
     }
 }

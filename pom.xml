@@ -24,7 +24,7 @@
         <fileEncoding>UTF-8</fileEncoding>
         <!--JAVA编译器版本-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
