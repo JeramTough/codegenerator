@@ -1,0 +1,46 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${baseServiceImplPackage}.MyBaseServiceImpl;
+import ${dtoPackage}.${entity}Dto;
+import ${paramsPackage}.AddOrUpdate${entity}Params;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+}
+#else
+public class ${table.serviceImplName} extends ServiceImpl<${entity}Mapper, ${entity}> implements ${table.serviceName}{
+
+    @Autowired
+    public ${table.serviceImplName}(WebApplicationContext wc) {
+        super(wc);
+    }
+
+    @Override
+    public ${entity}Dto addDataByParams(AddOrUpdate${entity}Params params) {
+        ${entity} entity =addByParamsAndReturnEntity(params);
+        return toDto(entity);
+    }
+
+    @Override
+    public String updateDataByParams(AddOrUpdate${entity}Params params) {
+        return updateByParams(params);
+    }
+
+}
+#end

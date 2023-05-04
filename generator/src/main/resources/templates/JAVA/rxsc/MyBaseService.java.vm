@@ -1,0 +1,18 @@
+package ${baseServicePackage};
+
+import com.jeramtough.jtweb.service.JtBaseService;
+
+
+/**
+ * <p>
+ *  Service基类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+
+public interface MyBaseService<T, D> extends JtBaseService<T, D> {
+
+
+}

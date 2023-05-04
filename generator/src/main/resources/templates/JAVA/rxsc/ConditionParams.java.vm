@@ -1,0 +1,20 @@
+package ${paramsPackage};
+
+import com.jeramtough.jtweb.model.params.BaseConditionParams;
+import io.swagger.annotations.ApiModel;
+
+import java.io.Serializable;
+
+/**
+ * <p>
+ * 条件查询参数
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+
+@ApiModel
+public class ${entity}ConditionParams extends BaseConditionParams implements Serializable{
+
+}
