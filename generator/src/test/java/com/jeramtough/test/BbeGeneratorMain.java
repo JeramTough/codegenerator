@@ -7,7 +7,7 @@ import com.jeramtough.jtcodegenerator.generator.code.JsCodeGenerator;
 /**
  * <pre>
  * Created on 2021/12/29 下午2:55
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public class BbeGeneratorMain {
@@ -37,7 +37,7 @@ public class BbeGeneratorMain {
 
             @Override
             public String getAuthor() {
-                return "WeiBoWen";
+                return "北京瑞曦wjx";
             }
 
             @Override

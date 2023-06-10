@@ -9,7 +9,7 @@
         <module>template</module>
     </modules>
 
-    <groupId>com.jeramtough</groupId>
+    <groupId>com.beijinruixi</groupId>
     <artifactId>codegenerator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>JTcodegenerator</name>

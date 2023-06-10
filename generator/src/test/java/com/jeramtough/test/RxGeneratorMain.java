@@ -1,9 +1,7 @@
 package com.jeramtough.test;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.code.CodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.CzHupuJavaCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.code.RxscJavaCodeGenerator;
 
 /**
  * <pre>
@@ -11,18 +9,18 @@ import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
  * by @author 北京瑞曦wjx
  * </pre>
  */
-public class CzHupuGeneratorMain {
+public class RxGeneratorMain {
 
     public static void main(String[] args) {
         GeneratorConfigAdapter generatorConfigAdapter = new GeneratorConfigAdapter() {
             @Override
             public String getBasePackageName() {
-                return "synthesistaxgovernance";
+                return "org.abd";
             }
 
             @Override
             public String getBusinessPrefix() {
-                return "hepu";
+                return null;
             }
 
             @Override
@@ -38,15 +36,13 @@ public class CzHupuGeneratorMain {
 
             @Override
             public String getAuthor() {
-                return "北京瑞曦wjx";
+                return "韦博文";
             }
 
             @Override
             public String getUrl() {
-//                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
-                return "jdbc:mysql://192.168.8.212:3307/hepu-data-collection" +
-                        "?useUnicode=true" +
-                        "&useSSL=false&characterEncoding=utf8";
+                return "jdbc:mysql://192.168.1.30:3307/hlj_tran?" +
+                        "characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai";
             }
 
             @Override
@@ -56,14 +52,15 @@ public class CzHupuGeneratorMain {
 
             @Override
             public String[] getUsernameAndPassword() {
-//                return new String[]{"postgres", "123456"};
-                return new String[]{"root", "root!@#123"};
+                return new String[]{"root", "123456"};
             }
 
         };
 
-        CodeGenerator javaCodeGenerator = new CzHupuJavaCodeGenerator(generatorConfigAdapter);
+        RxscJavaCodeGenerator rxscJavaCodeGenerator = new RxscJavaCodeGenerator(generatorConfigAdapter);
+//        JsCodeGenerator jsCodeGenerator = new JsCodeGenerator(generatorConfigAdapter);
 
-        javaCodeGenerator.generating();
+        rxscJavaCodeGenerator.generating();
+//        jsCodeGenerator.generating();
     }
 }

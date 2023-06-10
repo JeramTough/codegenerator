@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * <pre>
  * Created on 2022/6/7 下午9:22
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public class MysqlDdl2PgDdlUtil {

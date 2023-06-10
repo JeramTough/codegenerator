@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * <pre>
  * Created on 2021/12/29 下午4:24
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public class EachTableInfo {

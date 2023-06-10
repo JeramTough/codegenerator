@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * <pre>
  * Created on 2021/12/29 下午4:51
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public class CzAnalyseMapperJtTemplate extends BaseJtTemplate {

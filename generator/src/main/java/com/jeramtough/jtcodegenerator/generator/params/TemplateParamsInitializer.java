@@ -10,7 +10,7 @@ import java.util.List;
  * 自定义模板的自定义属性设置器，每个模板对应一个
  * <pre>
  * Created on 2022/7/4 下午5:03
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public interface TemplateParamsInitializer {

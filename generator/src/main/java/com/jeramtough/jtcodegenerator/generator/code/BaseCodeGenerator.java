@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  *
  * <pre>
  * Created on 2021/12/30 下午3:52
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public abstract class BaseCodeGenerator implements CodeGenerator, WithLogger {

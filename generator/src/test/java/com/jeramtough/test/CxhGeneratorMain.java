@@ -1,9 +1,8 @@
 package com.jeramtough.test;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.code.CodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.CzHupuJavaCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.code.JavaCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.code.JsCodeGenerator;
 
 /**
  * <pre>
@@ -11,18 +10,18 @@ import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
  * by @author 北京瑞曦wjx
  * </pre>
  */
-public class CzHupuGeneratorMain {
+public class CxhGeneratorMain {
 
     public static void main(String[] args) {
         GeneratorConfigAdapter generatorConfigAdapter = new GeneratorConfigAdapter() {
             @Override
             public String getBasePackageName() {
-                return "synthesistaxgovernance";
+                return "com.jeramtough.jtsearch.mobileapp";
             }
 
             @Override
             public String getBusinessPrefix() {
-                return "hepu";
+                return null;
             }
 
             @Override
@@ -38,15 +37,14 @@ public class CzHupuGeneratorMain {
 
             @Override
             public String getAuthor() {
-                return "北京瑞曦wjx";
+                return "WeiBoWen";
             }
 
             @Override
             public String getUrl() {
-//                return "jdbc:postgresql://127.0.0.1:5432/synthesis-tax-governance?user=postgres&password=123456&stringtype=unspecified";
-                return "jdbc:mysql://192.168.8.212:3307/hepu-data-collection" +
-                        "?useUnicode=true" +
-                        "&useSSL=false&characterEncoding=utf8";
+                return "jdbc:mysql://47.107.113" +
+                        ".233:3306/jt_search_db?useSSL=false&serverTimezone=GMT%2B8" +
+                        "&characterEncoding=utf-8";
             }
 
             @Override
@@ -56,14 +54,15 @@ public class CzHupuGeneratorMain {
 
             @Override
             public String[] getUsernameAndPassword() {
-//                return new String[]{"postgres", "123456"};
-                return new String[]{"root", "root!@#123"};
+                return new String[]{"root", "Aa73979901995"};
             }
 
         };
 
-        CodeGenerator javaCodeGenerator = new CzHupuJavaCodeGenerator(generatorConfigAdapter);
+        JavaCodeGenerator javaCodeGenerator = new JavaCodeGenerator(generatorConfigAdapter);
+        JsCodeGenerator jsCodeGenerator = new JsCodeGenerator(generatorConfigAdapter);
 
         javaCodeGenerator.generating();
+        jsCodeGenerator.generating();
     }
 }

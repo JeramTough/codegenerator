@@ -8,7 +8,7 @@ import com.jeramtough.jtcodegenerator.generator.code.CzJavaCodeGenerator;
 /**
  * <pre>
  * Created on 2021/12/29 下午2:55
- * by @author WeiBoWen
+ * by @author 北京瑞曦wjx
  * </pre>
  */
 public class CzGeneratorMain2 {
@@ -38,7 +38,7 @@ public class CzGeneratorMain2 {
 
             @Override
             public String getAuthor() {
-                return "WeiBoWen";
+                return "北京瑞曦wjx";
             }
 
             @Override
