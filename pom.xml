@@ -9,10 +9,10 @@
         <module>template</module>
     </modules>
 
-    <groupId>com.beijinruixi</groupId>
-    <artifactId>codegenerator</artifactId>
+    <groupId>com.jeramtough</groupId>
+    <artifactId>jtcodegenerator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>JTcodegenerator</name>
+    <name>jtcodegenerator</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
