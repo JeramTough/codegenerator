@@ -60,6 +60,7 @@ public class CxhGeneratorMain {
         };
 
         JavaCodeGenerator javaCodeGenerator = new JavaCodeGenerator(generatorConfigAdapter);
+
         JsCodeGenerator jsCodeGenerator = new JsCodeGenerator(generatorConfigAdapter);
 
         javaCodeGenerator.generating();

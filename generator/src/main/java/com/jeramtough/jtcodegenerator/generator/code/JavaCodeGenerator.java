@@ -3,11 +3,6 @@ package com.jeramtough.jtcodegenerator.generator.code;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.JavaCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
-import com.jeramtough.jtcodegenerator.generator.params.jt.JtTemplateParamsInitializer;
 import com.jeramtough.jtlog.with.WithLogger;
 
 /**
