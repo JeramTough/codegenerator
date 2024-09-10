@@ -1,4 +1,4 @@
-package ${paramsPackage};
+package ${dtoPackage};
 
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import com.alibaba.fastjson2.annotation.JSONField;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
+
 /**
  * <p>
  * $!{table.comment}
@@ -15,37 +16,41 @@ import lombok.Data;
  * @author ${author}
  * @since ${date}
  */
-
 @Data
-@Schema(description  = "AddOrUpdate${entity}Params")
-public class AddOrUpdate${entity}Params implements Serializable{
+@Schema(description = "${entity}对象")
+public class ${entity}Vo implements Serializable {
 
 #if(${entitySerialVersionUID})
-    private static final long serialVersionUID=1L;
+
+private static final long serialVersionUID = 1L;
 #end
 ## ----------  BEGIN 字段循环遍历  ----------
 #foreach($field in ${table.fields})
 
-#if(${field.keyFlag})
-#set($keyPropertyName=${field.propertyName})
-#end
-#if("$!field.comment" != "")
-   @Schema(description = "${field.comment}")
-#end
+    #if(${field.keyFlag})
+        #set($keyPropertyName=${field.propertyName})
+    #end
+    #if("$!field.comment" != "")
+        #if(${swagger})
+        @Schema(description = "${field.comment}")
+        #else
+        /**
+         * ${field.comment}
+         */
+        #end
+    #end
     ## 添加对 java.util.Date 类型的判断
     #if(${field.type} == "datetime")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     #end
-## 乐观锁注解
-#if(${versionFieldName}==${field.name})
-    @Version
-#end
-## 逻辑删除注解
-#if(${logicDeleteFieldName}==${field.name})
-    @TableLogic
-#end
+
+    #if(${field.propertyName} == "id")
+    private String ${field.propertyName};
+    #else
     private ${field.propertyType} ${field.propertyName};
+    #end
+
 #end
 ## ----------  END 字段循环遍历  ----------
 

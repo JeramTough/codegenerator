@@ -1,0 +1,106 @@
+package ${package.Controller};
+
+#if(${restControllerStyle})
+import org.springframework.web.bind.annotation.RestController;
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+import ${dtoPackage}.${table.entityName}Dto;
+import ${paramsPackage}.AddOrUpdate${table.entityName}Params;
+import ${paramsPackage}.${table.entityName}ConditionParams;
+import ${package.Service}.${table.serviceName};
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.aspect.annotation.AutoLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Api(tags = {"#if(${table.comment})${table.comment}#else${package.ModuleName}#end-API"})
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName}{
+#end
+    private final ${table.serviceName}  ${firstLowerEntityName}Service;
+
+    @Autowired
+    public ${table.controllerName}(${table.serviceName} ${firstLowerEntityName}Service) {
+        this.${firstLowerEntityName}Service = ${firstLowerEntityName}Service;
+    }
+
+    @AutoLog(value = "${table.name}-新增")
+    @ApiOperation(value = "新增", notes = "${table.name}-新增")
+    @RequiresPermissions("${table.name}:add")
+    @RequestMapping(value = "/add", method = {RequestMethod.POST})
+    public Result<${table.entityName}Dto> add(
+        @RequestBody AddOrUpdate${table.entityName}Params params) {
+        return Result.OK(${firstLowerEntityName}Service.addDataByParams(params));
+    }
+
+    @AutoLog(value = "${table.name}-更新")
+    @ApiOperation(value = "更新", notes = "${table.name}-更新")
+    @RequiresPermissions("${table.name}:edit")
+    @RequestMapping(value = "/edit", method = {RequestMethod.POST})
+    public Result<String> edit(
+        @RequestBody AddOrUpdate${table.entityName}Params params) {
+        ${firstLowerEntityName}Service.updateDataByParams(params);
+        return Result.OK();
+    }
+
+    @AutoLog(value = "${table.name}-删除")
+    @ApiOperation(value = "删除", notes = "${table.name}-删除")
+    @RequiresPermissions("${table.name}:delete")
+        @RequestMapping(value = "/delete", method = {RequestMethod.DELETE})
+    public Result<Boolean> delete(@RequestParam(name="id",required=true) String id) {
+        return Result.OK(${firstLowerEntityName}Service.removeByIds(Collections.singletonList(id)));
+    }
+
+    @AutoLog(value = "${table.name}-批量删除")
+    @ApiOperation(value="批量删除", notes="${table.name}-批量删除")
+    @RequiresPermissions("${table.name}:deleteBatch")
+    @DeleteMapping(value = "/deleteBatch")
+    public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
+        this.${firstLowerEntityName}Service.removeByIds(Arrays.asList(ids.split(",")));
+        return Result.OK("批量删除成功!");
+    }
+
+    @ApiOperation(value = "分页查询", notes = "${table.name}-分页查询")
+    @RequestMapping(value = "/list", method = {RequestMethod.GET})
+    public Result<IPage<${table.entityName}Dto>> page(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+@RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, ${table.entityName}ConditionParams conditionParams) {
+        return Result.OK(
+    ${firstLowerEntityName}Service.page(pageNo,pageSize, conditionParams));
+    }
+
+
+}
+
+#end

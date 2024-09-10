@@ -1,8 +1,8 @@
 package com.jeramtough.test;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.code.RxJavaCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.code.RxscJavaCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.code.JavaCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.code.JsCodeGenerator;
 
 /**
  * <pre>
@@ -10,13 +10,13 @@ import com.jeramtough.jtcodegenerator.generator.code.RxscJavaCodeGenerator;
  * by @author 北京瑞曦wjx
  * </pre>
  */
-public class RxGeneratorMain {
+public class JtDwkGeneratorMain {
 
     public static void main(String[] args) {
         GeneratorConfigAdapter generatorConfigAdapter = new GeneratorConfigAdapter() {
             @Override
             public String getBasePackageName() {
-                return "org.jeecg.modules.appointmentcall";
+                return "com.jeramtough.dwk.mobileapp";
             }
 
             @Override
@@ -37,31 +37,33 @@ public class RxGeneratorMain {
 
             @Override
             public String getAuthor() {
-                return "韦博文";
+                return "WeiBoWen";
             }
 
             @Override
             public String getUrl() {
-//                return "jdbc:mysql://192.168.1.30:3304/rici-appointment-call?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&serverTimezone=Asia/Shanghai";
-                return "jdbc:mysql://192.168.1.30:3304/rici-appointment-call?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8";
+                return "jdbc:mysql://47.107.113" +
+                        ".233:3306/dwk_db?useSSL=false&serverTimezone=GMT%2B8" +
+                        "&characterEncoding=utf-8";
             }
 
             @Override
             public String getDriverName() {
-                return "com.mysql.cj.jdbc.Driver";
+                return "com.mysql.jdbc.Driver";
             }
 
             @Override
             public String[] getUsernameAndPassword() {
-                return new String[]{"root", "RICI123456"};
+                return new String[]{"root", "Aa73979901995"};
             }
 
         };
 
-        RxJavaCodeGenerator rxscJavaCodeGenerator = new RxJavaCodeGenerator(generatorConfigAdapter);
-//        JsCodeGenerator jsCodeGenerator = new JsCodeGenerator(generatorConfigAdapter);
+        JavaCodeGenerator javaCodeGenerator = new JavaCodeGenerator(generatorConfigAdapter);
 
-        rxscJavaCodeGenerator.generating();
-//        jsCodeGenerator.generating();
+        JsCodeGenerator jsCodeGenerator = new JsCodeGenerator(generatorConfigAdapter);
+
+        javaCodeGenerator.generating();
+        jsCodeGenerator.generating();
     }
 }

@@ -11,16 +11,16 @@ import com.jeramtough.jtlog.with.WithLogger;
  * by @author 北京瑞曦wjx
  * </pre>
  */
-public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerator, WithLogger {
+public class RxJavaCodeGenerator extends BaseCodeGenerator implements CodeGenerator, WithLogger {
 
-    public JavaCodeGenerator(
+    public RxJavaCodeGenerator(
             GeneratorConfigAdapter generatorConfigAdapter) {
         super(generatorConfigAdapter);
     }
 
     @Override
     protected GeneratorTag initTag() {
-        return GeneratorTag.JAVA;
+        return GeneratorTag.RX_JAVA;
     }
 
 
@@ -33,7 +33,7 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
                    .outputDir(pathHandler.getJavaOutputPath())
                    .author(generatorConfigAdapter.getAuthor())
                    .enableSwagger()
-                   .dateType(DateType.ONLY_DATE)
+                   .dateType(DateType.TIME_PACK)
                    .commentDate("yyyy-MM-dd HH:mm:ss");
         });
 
@@ -44,19 +44,17 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
                    .service("service")
                    .serviceImpl("service.impl")
                    .mapper("mapper")
-                   .controller("action.controller")
-                   .other("model.dto");
+                   .controller("action.controller");
         });
 
         //模板设置
         fastAutoGenerator.templateConfig(builder -> {
             builder
-                    .entity("/templates/JAVA/jt/Entity.java")
-                    .service("/templates/JAVA/jt/Service.java")
-                    .serviceImpl("/templates/JAVA/jt/ServiceImpl.java")
-                    .mapper("/templates/JAVA/jt/Mapper.java")
-                    .mapperXml("/templates/JAVA/jt/mapper.xml")
-                    .controller("/templates/JAVA/jt/Controller.java");
+                    .entity("/templates/JAVA/rx/Entity.java")
+                    .service("/templates/JAVA/rx/Service.java")
+                    .serviceImpl("/templates/JAVA/rx/ServiceImpl.java")
+                    .mapper("/templates/JAVA/rx/Mapper.java")
+                    .controller("/templates/JAVA/rx/Controller.java");
         });
 
         //设置策略
@@ -71,6 +69,8 @@ public class JavaCodeGenerator extends BaseCodeGenerator implements CodeGenerato
 
             builder.controllerBuilder()
                    .enableRestStyle();
+
+            builder.entityBuilder().enableLombok();
         });
     }
 

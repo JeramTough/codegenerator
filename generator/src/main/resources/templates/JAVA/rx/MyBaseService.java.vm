@@ -12,7 +12,7 @@ import com.jeramtough.jtweb.service.JtBaseService;
  * @since ${date}
  */
 
-public interface MyBaseService<T, V> extends JtBaseService<T, V> {
+public interface MyBaseService<T, D> extends JtBaseService<T, D> {
 
 
 }

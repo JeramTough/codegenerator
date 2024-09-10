@@ -8,6 +8,7 @@ import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer
 import com.jeramtough.jtcodegenerator.generator.path.PathHandler;
 import com.jeramtough.jtcodegenerator.generator.template.JtTemplate;
 import com.jeramtough.jtcomponent.utils.StringUtil;
+import com.jeramtough.jtlog.facade.L;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -108,7 +109,9 @@ public abstract class BaseCustomCodeGenerator implements CustomCodeGenerator {
                                         new File(outputDirPath.toString());
 
                                 //开始模板生成
-                                jtTemplate.generating(eachTableInfo, outputDir);
+                                if (jtTemplate.isCreated()) {
+                                    jtTemplate.generating(eachTableInfo, outputDir);
+                                }
                             });
                 });
     }

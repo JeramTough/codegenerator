@@ -26,5 +26,9 @@ public enum GeneratorTag {
      * CZ_HEPU_JAVA
      */
     CZ_HEPU_JAVA,
+    /**
+     * CZ_HEPU_JAVA
+     */
+    RX_JAVA,
 
 }

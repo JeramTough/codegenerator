@@ -2,8 +2,9 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
+#if(${mapperAnnotation})
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+#end
 
 /**
  * <p>
@@ -13,8 +14,9 @@ import org.springframework.stereotype.Repository;
  * @author ${author}
  * @since ${date}
  */
-@Repository
+#if(${mapperAnnotation})
 @Mapper
+#end
 #if(${kotlin})
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 #else

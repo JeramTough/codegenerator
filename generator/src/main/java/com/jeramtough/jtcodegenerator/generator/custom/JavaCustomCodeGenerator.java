@@ -26,7 +26,8 @@ public class JavaCustomCodeGenerator extends BaseCustomCodeGenerator {
 
     @Override
     protected void initTemplates(List<JtTemplate> jtTemplateList) {
-        this.jtTemplateList.add(new DtoJtTemplate(super.generatorConfigAdapter));
+//        this.jtTemplateList.add(new DtoJtTemplate(super.generatorConfigAdapter));
+        this.jtTemplateList.add(new VoJtTemplate(super.generatorConfigAdapter));
         this.jtTemplateList.add(new BasicControllerJtTemplate(super.generatorConfigAdapter));
         this.jtTemplateList.add(new AddOrUpdateParamsJtTemplate(super.generatorConfigAdapter));
         this.jtTemplateList.add(new CoditionParamsJtTemplate(super.generatorConfigAdapter));

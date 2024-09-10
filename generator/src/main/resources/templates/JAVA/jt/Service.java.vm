@@ -1,7 +1,7 @@
 package ${package.Service};
 
 import ${package.Entity}.${entity};
-import ${dtoPackage}.${entity}Dto;
+import ${voPackage}.${entity}Vo;
 import ${baseServicePackage}.MyBaseService;
 import ${paramsPackage}.AddOrUpdate${entity}Params;
 
@@ -16,9 +16,9 @@ import ${paramsPackage}.AddOrUpdate${entity}Params;
 #if(${kotlin})
 interface ${table.serviceName} : ${superServiceClass}<${entity}>
 #else
-public interface ${table.serviceName} extends MyBaseService<${entity}, ${entity}Dto> {
+public interface ${table.serviceName} extends MyBaseService<${entity}, ${entity}Vo> {
 
-    ${entity}Dto addDataByParams(AddOrUpdate${entity}Params params);
+    ${entity}Vo addDataByParams(AddOrUpdate${entity}Params params);
 
     String updateDataByParams(AddOrUpdate${entity}Params params);
 

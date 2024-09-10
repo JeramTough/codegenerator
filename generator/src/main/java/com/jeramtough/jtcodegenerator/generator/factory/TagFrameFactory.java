@@ -2,10 +2,7 @@ package com.jeramtough.jtcodegenerator.generator.factory;
 
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
 import com.jeramtough.jtcodegenerator.generator.code.GeneratorTag;
-import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.JavaCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.JsCustomCodeGenerator;
+import com.jeramtough.jtcodegenerator.generator.custom.*;
 import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.params.cz.CzHePuTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitializer;
@@ -29,6 +26,8 @@ public class TagFrameFactory {
                 return new CzTemplateParamsInitializer();
             case CZ_HEPU_JAVA:
                 return new CzHePuTemplateParamsInitializer();
+            case RX_JAVA:
+                return new JtTemplateParamsInitializer();
             default:
                 throw new IllegalStateException();
         }
@@ -43,6 +42,9 @@ public class TagFrameFactory {
         switch (tag) {
             case JAVA:
                 return new JavaCustomCodeGenerator(tag, generatorConfigAdapter,
+                        templateParamsInitializer);
+            case RX_JAVA:
+                return new RxJavaCustomCodeGenerator(tag, generatorConfigAdapter,
                         templateParamsInitializer);
             case CZ_JAVA:
                 return new CzJavaCustomCodeGenerator(tag, generatorConfigAdapter,

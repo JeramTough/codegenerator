@@ -1,26 +1,12 @@
 package com.jeramtough.jtcodegenerator.generator.code;
 
-import cn.hutool.core.io.IoUtil;
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.jeramtough.jtcodegenerator.generator.adapter.GeneratorConfigAdapter;
-import com.jeramtough.jtcodegenerator.generator.custom.CustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.custom.CzJavaCustomCodeGenerator;
-import com.jeramtough.jtcodegenerator.generator.params.TemplateParamsInitializer;
-import com.jeramtough.jtcodegenerator.generator.params.cz.CzTemplateParamsInitializer;
 import com.jeramtough.jtcodegenerator.generator.typeconvert.CzPostgreSqlTypeConvert;
 import com.jeramtough.jtcomponent.utils.StringUtil;
 import com.jeramtough.jtlog.with.WithLogger;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <pre>

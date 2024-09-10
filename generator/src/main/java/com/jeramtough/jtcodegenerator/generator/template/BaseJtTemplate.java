@@ -37,6 +37,10 @@ public abstract class BaseJtTemplate implements JtTemplate {
         template = velocityEngine.getTemplate(getTemplatePath());
     }
 
+    @Override
+    public boolean isCreated() {
+        return true;
+    }
 
     @Override
     public void generating(EachTableInfo eachTableInfo, File outputDir) {

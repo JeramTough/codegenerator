@@ -43,6 +43,8 @@ public class PathHandler {
                 return getJsOutputPath();
             case CZ_JAVA:
                 return getJavaOutputPath();
+            case RX_JAVA:
+                return getJavaOutputPath();
             case CZ_HEPU_JAVA:
                 return getJavaOutputPath();
             default:

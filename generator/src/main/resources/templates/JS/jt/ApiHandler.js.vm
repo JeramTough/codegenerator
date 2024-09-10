@@ -1,11 +1,16 @@
+import createAxiosInstance from '@/api/base/AxiosRequest.js';
+import httpConstants from "@/api/base/HttpConstants.js";
+
 #foreach($each in ${eachTableNames})
-import ${each.firstLowerEntityName}Api from "@/api/${projectName}/${each.entityName}Api";
+import ${each.firstLowerEntityName}ApiCreate from "@/api/${projectName}/${each.entityName}Api";
 #end
+
+const axiosRequest = createAxiosInstance(httpConstants.GGM_BASE_URL);
 
 let apiHandler = {
 
     #foreach($each2 in ${eachTableNames})
-    ${each2.firstLowerEntityName}Api: ${each2.firstLowerEntityName}Api,
+    ${each2.firstLowerEntityName}Api: ${each2.firstLowerEntityName}ApiCreate(axiosRequest),
     #end
 };
 

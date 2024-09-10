@@ -1,0 +1,20 @@
+package ${package.Controller};
+
+import io.swagger.annotations.ApiResponses;
+
+
+/**
+ * <p>
+ * 控制器基类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+
+@ApiResponses({
+})
+public abstract class MyBaseController {
+
+
+}

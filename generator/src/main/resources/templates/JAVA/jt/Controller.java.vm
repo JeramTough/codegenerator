@@ -8,16 +8,17 @@ import org.springframework.stereotype.Controller;
 #if(${superControllerClassPackage})
 import ${superControllerClassPackage};
 #end
-import ${dtoPackage}.${table.entityName}Dto;
+import ${voPackage}.${table.entityName}Vo;
 import ${paramsPackage}.AddOrUpdate${table.entityName}Params;
 import ${paramsPackage}.${table.entityName}ConditionParams;
 import ${package.Service}.${table.serviceName};
 import com.jeramtough.jtweb.component.apiresponse.bean.CommonApiResponse;
-import com.jeramtough.jtweb.model.dto.PageDto;
+import com.jeramtough.jtweb.model.vo.PageVo;
 import com.jeramtough.jtweb.model.params.DeleteByIdsParams;
 import com.jeramtough.jtweb.model.params.QueryByPageParams;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ import java.util.List;
  * @author ${author}
  * @since ${date}
  */
-@Api(tags = {"#if(${package.ModuleName})${package.ModuleName}#end#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end-API"})
+@Tag(name = "#if(${package.ModuleName})${package.ModuleName}#end#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end-API")
 #if(${restControllerStyle})
 @RestController
 #else
@@ -56,38 +57,39 @@ public class ${table.controllerName} extends MyBaseController{
         this.thisService = thisService;
     }
 
-    @ApiOperation(value = "新增", notes = "新增")
+    @Operation(summary = "新增", description = "新增")
     @RequestMapping(value = "/add", method = {RequestMethod.POST})
-    public CommonApiResponse<${table.entityName}Dto> add(
+    public CommonApiResponse<${table.entityName}Vo> add(
         @RequestBody AddOrUpdate${table.entityName}Params params) {
-        return getSuccessfulApiResponse(thisService.addDataByParams(params));
+        return getOkApiResponse(thisService.addDataByParams(params));
     }
 
-    @ApiOperation(value = "更新", notes = "更新")
+    @Operation(summary = "更新", description = "更新")
     @RequestMapping(value = "/update", method = {RequestMethod.POST})
     public CommonApiResponse<String> update(
         @RequestBody AddOrUpdate${table.entityName}Params params) {
-        return getSuccessfulApiResponse(thisService.updateDataByParams(params));
+        return getOkApiResponse(thisService.updateDataByParams(params));
     }
 
-    @ApiOperation(value = "删除", notes = "删除")
+    @Operation(summary = "删除", description = "删除")
         @RequestMapping(value = "/delete", method = {RequestMethod.POST})
     public CommonApiResponse<Boolean> delete(@RequestBody DeleteByIdsParams params) {
-        return getSuccessfulApiResponse(thisService.removeByIds(params.getIds()));
+        return getOkApiResponse(thisService.removeByIds(params.getIds()));
     }
 
-    @ApiOperation(value = "分页查询", notes = "分页查询")
+    @Operation(summary = "分页查询", description = "分页查询")
     @RequestMapping(value = "/page", method = {RequestMethod.GET})
-    public CommonApiResponse<PageDto<${table.entityName}Dto>> page(
-        QueryByPageParams queryByPageParams, ${table.entityName}ConditionParams conditionParams) {
-        return getSuccessfulApiResponse(
+    public CommonApiResponse<PageVo<${table.entityName}Vo>> page(
+        @ParameterObject QueryByPageParams queryByPageParams,
+        @ParameterObject ${table.entityName}ConditionParams conditionParams) {
+        return getOkApiResponse(
         thisService.pageByCondition(queryByPageParams, conditionParams));
     }
 
-    @ApiOperation(value = "列表查询", notes = "列表查询")
+    @Operation(summary = "列表查询", description = "列表查询")
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
-    public CommonApiResponse<List<${table.entityName}Dto>> list( ${table.entityName}ConditionParams conditionParams) {
-        return getSuccessfulApiResponse(
+    public CommonApiResponse<List<${table.entityName}Vo>> list(@ParameterObject ${table.entityName}ConditionParams conditionParams) {
+        return getOkApiResponse(
         thisService.listByCondition(conditionParams));
     }
 

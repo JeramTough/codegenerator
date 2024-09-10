@@ -1,0 +1,97 @@
+package ${package.ServiceImpl};
+
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import ${baseServiceImplPackage}.MyBaseServiceImpl;
+import ${dtoPackage}.${entity}Dto;
+import ${paramsPackage}.AddOrUpdate${entity}Params;
+import ${paramsPackage}.${entity}ConditionParams;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
+
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+}
+#else
+public class ${table.serviceImplName} extends MyBaseServiceImpl<${entity}Mapper, ${entity}> implements ${table.serviceName}{
+
+    @Autowired
+    public ${table.serviceImplName}(WebApplicationContext wc) {
+        super(wc);
+    }
+
+    @Override
+    public ${entity}Dto addDataByParams(AddOrUpdate${entity}Params params) {
+        //校验参数
+
+        //业务
+
+        //保存数据库
+        ${entity} entity =null;
+        return BeanUtil.copyProperties(entity, ${entity}Dto.class);
+    }
+
+    @Override
+    public void updateDataByParams(AddOrUpdate${entity}Params params) {
+        //校验参数
+
+        //业务
+
+        //更新数据库
+    }
+
+    @Override 
+    public IPage<${entity}Dto> page(Integer pageNo, Integer pageSize,
+        ${entity}ConditionParams conditionParams) {
+
+        QueryWrapper<${entity}> queryWrapper = getConditionQuery(conditionParams);
+        Page<${entity}> page = new Page<>();
+        page.setCurrent(pageNo);
+        page.setSize(pageSize);
+
+        IPage<${entity}Dto> pageResult = super.pageDto(page, queryWrapper,
+                ${entity}Dto.class);
+        return pageResult;
+    }
+
+        @Override
+        public List<${entity}Dto> list(${entity}ConditionParams conditionParams) {
+            QueryWrapper<${entity}> queryWrapper = getConditionQuery(conditionParams);
+            List<${entity}Dto> dtoList = listDto(queryWrapper, ${entity}Dto.class);
+            return dtoList;
+        }
+
+
+
+        //****************************
+
+        private QueryWrapper<${entity}> getConditionQuery(
+                ${entity}ConditionParams conditionParams) {
+
+            QueryWrapper<${entity}> queryWrapper = new QueryWrapper();
+
+            //查询条件
+
+            return queryWrapper;
+        }
+
+}
+#end

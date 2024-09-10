@@ -12,6 +12,8 @@ import java.io.File;
  */
 public interface JtTemplate {
 
+    boolean isCreated();
+
     void generating(EachTableInfo eachTableInfo, File outputDir);
 
     String getTemplatePath();

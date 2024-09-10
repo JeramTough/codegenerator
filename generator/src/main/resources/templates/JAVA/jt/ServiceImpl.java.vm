@@ -4,7 +4,7 @@ import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${baseServiceImplPackage}.MyBaseServiceImpl;
-import ${dtoPackage}.${entity}Dto;
+import ${voPackage}.${entity}Vo;
 import ${paramsPackage}.AddOrUpdate${entity}Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 
 }
 #else
-public class ${table.serviceImplName} extends MyBaseServiceImpl<${entity}Mapper, ${entity}, ${entity}Dto> implements ${table.serviceName}{
+public class ${table.serviceImplName} extends MyBaseServiceImpl<${entity}Mapper, ${entity}, ${entity}Vo> implements ${table.serviceName}{
 
     @Autowired
     public ${table.serviceImplName}(WebApplicationContext wc) {
@@ -32,9 +32,9 @@ public class ${table.serviceImplName} extends MyBaseServiceImpl<${entity}Mapper,
     }
 
     @Override
-    public ${entity}Dto addDataByParams(AddOrUpdate${entity}Params params) {
+    public ${entity}Vo addDataByParams(AddOrUpdate${entity}Params params) {
         ${entity} entity =addByParamsAndReturnEntity(params);
-        return toDto(entity);
+        return toVo(entity);
     }
 
     @Override

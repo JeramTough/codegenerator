@@ -16,8 +16,8 @@ import com.jeramtough.jtweb.service.impl.JtBaseServiceImpl;
  * @since ${date}
  */
 
-public abstract class MyBaseServiceImpl<M extends BaseMapper<T>, T, V>
-        extends JtBaseServiceImpl<M, T, V> implements MyBaseService<T, V>, WithLogger {
+public abstract class MyBaseServiceImpl<M extends BaseMapper<T>, T, D>
+        extends JtBaseServiceImpl<M, T, D> implements MyBaseService<T, D>, WithLogger {
 
     protected MyBaseServiceImpl(WebApplicationContext wc) {
         super(wc);

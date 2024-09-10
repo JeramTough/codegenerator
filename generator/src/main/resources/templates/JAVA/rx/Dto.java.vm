@@ -4,7 +4,7 @@ package ${dtoPackage};
 import ${pkg};
 #end
 #if(${swagger})
-
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 #end
 #if(${entityLombokModel})
@@ -31,7 +31,6 @@ import lombok.Setter;
     #end
 #end
 #if(${table.convert})
-@TableName("${schemaName}${table.name}")
 #end
 #if(${swagger})
 @ApiModel(value = "${entity}对象", description = "$!{table.comment}")

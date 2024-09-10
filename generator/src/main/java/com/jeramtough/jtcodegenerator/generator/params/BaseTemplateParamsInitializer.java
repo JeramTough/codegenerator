@@ -96,6 +96,9 @@ public class BaseTemplateParamsInitializer implements TemplateParamsInitializer 
         String dtoPackage =
                 generatorConfigAdapter.getBasePackageName() + ".model.dto";
         objectMap.put("dtoPackage" , dtoPackage);
+        String voPackage =
+                generatorConfigAdapter.getBasePackageName() + ".model.vo";
+        objectMap.put("voPackage" , voPackage);
 
         String paramsPackage = generatorConfigAdapter.getBasePackageName() + ".model.params." + lowerEntityName;
         objectMap.put("paramsPackage" , paramsPackage);
